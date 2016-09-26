@@ -1,0 +1,720 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43A1E57F719F0252705F9E8295C1385B /* EasyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B213B197CC0893555D170CF912371B7 /* EasyJSON-dummy.m */; };
+		739A13434BB2B031E2EF5B7131139873 /* EasyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 60E7C5E7D891948F4D6AA67F207AE726 /* EasyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79FA03AA27C5391E660C61C0324EF09C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		968E66E2A2EF78597F3D236DF38A672B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		A0FC534C28D8966EAF5A6D29762EE895 /* Pods-EasyJSON_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C2A2EE0B777D09D87E7DD57013C91AB6 /* Pods-EasyJSON_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0A9C930E8BC82E953A311773A6E0FCA /* Pods-EasyJSON_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ED79B6ABB23E8C871B070383C9651980 /* Pods-EasyJSON_Example-dummy.m */; };
+		C91AFF2827E7AF0CE69C6A1D8B381639 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B154CAE772C3089BFFF8888B75AF2DF8 /* JSONModel.swift */; };
+		D496C5519BEE18DFCDC7C0441F012DD4 /* Pods-EasyJSON_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E808B16B92B833F97EF4137C24B4AE /* Pods-EasyJSON_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F72761B4DC55D5C2575428CA031B6377 /* Pods-EasyJSON_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3EA87C0C329EFFD5218A654823576D /* Pods-EasyJSON_Tests-dummy.m */; };
+		FA5B298E8AB24626D071315009CC5538 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCD2C9FBE40EDA28965618DA4818EECF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F706011EB358EFD9E8E92D3DB136B4D9;
+			remoteInfo = EasyJSON;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01E808B16B92B833F97EF4137C24B4AE /* Pods-EasyJSON_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EasyJSON_Tests-umbrella.h"; sourceTree = "<group>"; };
+		02D0DDE9613F47F637D3635C7ABD060A /* Pods-EasyJSON_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EasyJSON_Tests-resources.sh"; sourceTree = "<group>"; };
+		0484E6AE21B4B3EA83DE7B39F9C2584A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		071E5FE167F2CA6CCD16AF3F1ED9692F /* EasyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyJSON-prefix.pch"; sourceTree = "<group>"; };
+		08E1A32E4215621252A685FAD8550201 /* EasyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = EasyJSON.modulemap; sourceTree = "<group>"; };
+		0B1B70A2F3167A5481C629B39065B9E5 /* Pods-EasyJSON_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EasyJSON_Example-frameworks.sh"; sourceTree = "<group>"; };
+		110C2134D3CA5CF1B5A6AFBE280C8404 /* Pods_EasyJSON_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyJSON_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		123FC68F0E65EB9BD8B4A6CF8C2E8A71 /* Pods-EasyJSON_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-EasyJSON_Tests.modulemap"; sourceTree = "<group>"; };
+		15482D29967AD48434E3188DC9B6C719 /* Pods-EasyJSON_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyJSON_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		1640CFCAF07C7C669A6022F1441DA246 /* Pods-EasyJSON_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-EasyJSON_Example.modulemap"; sourceTree = "<group>"; };
+		16649F18065BA058702378460D9617E7 /* Pods-EasyJSON_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyJSON_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		40E03AB02F4F5E20BF21EBF28A8530F5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B213B197CC0893555D170CF912371B7 /* EasyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EasyJSON-dummy.m"; sourceTree = "<group>"; };
+		5A3EA87C0C329EFFD5218A654823576D /* Pods-EasyJSON_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EasyJSON_Tests-dummy.m"; sourceTree = "<group>"; };
+		60E7C5E7D891948F4D6AA67F207AE726 /* EasyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyJSON-umbrella.h"; sourceTree = "<group>"; };
+		7C3F68FBBE66950046568BF459C9B0E6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		957249613BD93A0FE4FD6A6E57704E04 /* Pods-EasyJSON_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyJSON_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		9E12B4BF7A8F2D2A7444F419FA7701FF /* EasyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyJSON.xcconfig; sourceTree = "<group>"; };
+		A0E2CFE1B02649DC0181B48212F5E146 /* Pods-EasyJSON_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EasyJSON_Example-resources.sh"; sourceTree = "<group>"; };
+		B154CAE772C3089BFFF8888B75AF2DF8 /* JSONModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
+		C2A2EE0B777D09D87E7DD57013C91AB6 /* Pods-EasyJSON_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EasyJSON_Example-umbrella.h"; sourceTree = "<group>"; };
+		C3D0E179349A59881E3FC559C26FC902 /* Pods-EasyJSON_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyJSON_Example.release.xcconfig"; sourceTree = "<group>"; };
+		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D2AA0B81DC6B7FE30A69026DD5091E9F /* EasyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30D1EF8E3ED4D0887EDFA9D214E076B /* Pods-EasyJSON_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyJSON_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		D4DB6EBA3F06D9DB461A28CCF0A28836 /* Pods-EasyJSON_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EasyJSON_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		EC0FE0698FAC68492CDA517B4A73E953 /* Pods-EasyJSON_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyJSON_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		ED79B6ABB23E8C871B070383C9651980 /* Pods-EasyJSON_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EasyJSON_Example-dummy.m"; sourceTree = "<group>"; };
+		F15909E2CA88112517DDCD7D12960C63 /* Pods_EasyJSON_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyJSON_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2758EB181FEB9B1B674F549BBC5A087 /* Pods-EasyJSON_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EasyJSON_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F732B0CA6F70BD063827DE521DB33030 /* Pods-EasyJSON_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EasyJSON_Tests-frameworks.sh"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D1D1B54D0234EB32F7E78A7DA45CF5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5B298E8AB24626D071315009CC5538 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B062B9D2CDCDC74D7E7EC600EBBF4410 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79FA03AA27C5391E660C61C0324EF09C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E57491D46BF3BD1E6BD7B2BD42002DCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				968E66E2A2EF78597F3D236DF38A672B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08C09F6EEF36731B962B0CF8D9086351 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2445DB567F2301C8D225867071B21551 /* Pods-EasyJSON_Example */,
+				F9674B49C0A405CD1763C2F25911C825 /* Pods-EasyJSON_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		2445DB567F2301C8D225867071B21551 /* Pods-EasyJSON_Example */ = {
+			isa = PBXGroup;
+			children = (
+				40E03AB02F4F5E20BF21EBF28A8530F5 /* Info.plist */,
+				1640CFCAF07C7C669A6022F1441DA246 /* Pods-EasyJSON_Example.modulemap */,
+				D4DB6EBA3F06D9DB461A28CCF0A28836 /* Pods-EasyJSON_Example-acknowledgements.markdown */,
+				15482D29967AD48434E3188DC9B6C719 /* Pods-EasyJSON_Example-acknowledgements.plist */,
+				ED79B6ABB23E8C871B070383C9651980 /* Pods-EasyJSON_Example-dummy.m */,
+				0B1B70A2F3167A5481C629B39065B9E5 /* Pods-EasyJSON_Example-frameworks.sh */,
+				A0E2CFE1B02649DC0181B48212F5E146 /* Pods-EasyJSON_Example-resources.sh */,
+				C2A2EE0B777D09D87E7DD57013C91AB6 /* Pods-EasyJSON_Example-umbrella.h */,
+				D30D1EF8E3ED4D0887EDFA9D214E076B /* Pods-EasyJSON_Example.debug.xcconfig */,
+				C3D0E179349A59881E3FC559C26FC902 /* Pods-EasyJSON_Example.release.xcconfig */,
+			);
+			name = "Pods-EasyJSON_Example";
+			path = "Target Support Files/Pods-EasyJSON_Example";
+			sourceTree = "<group>";
+		};
+		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7B8FA477C35FB75BF33B60F39FB5E38E /* EasyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				FA1112A052BD0C000B474612FC211A1A /* EasyJSON */,
+				A4636667F0F0716EFDC74AB16F0E2460 /* Support Files */,
+			);
+			name = EasyJSON;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				EF0304F3C948D1A329F37FBBA6CB37EE /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				877898795098D0F8ED41F5C3666CDCA1 /* Products */,
+				08C09F6EEF36731B962B0CF8D9086351 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		877898795098D0F8ED41F5C3666CDCA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA0B81DC6B7FE30A69026DD5091E9F /* EasyJSON.framework */,
+				110C2134D3CA5CF1B5A6AFBE280C8404 /* Pods_EasyJSON_Example.framework */,
+				F15909E2CA88112517DDCD7D12960C63 /* Pods_EasyJSON_Tests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4636667F0F0716EFDC74AB16F0E2460 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				08E1A32E4215621252A685FAD8550201 /* EasyJSON.modulemap */,
+				9E12B4BF7A8F2D2A7444F419FA7701FF /* EasyJSON.xcconfig */,
+				4B213B197CC0893555D170CF912371B7 /* EasyJSON-dummy.m */,
+				071E5FE167F2CA6CCD16AF3F1ED9692F /* EasyJSON-prefix.pch */,
+				60E7C5E7D891948F4D6AA67F207AE726 /* EasyJSON-umbrella.h */,
+				7C3F68FBBE66950046568BF459C9B0E6 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/EasyJSON";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DAE9A602FE2D6538C8EBC69915297C9A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B154CAE772C3089BFFF8888B75AF2DF8 /* JSONModel.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EF0304F3C948D1A329F37FBBA6CB37EE /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B8FA477C35FB75BF33B60F39FB5E38E /* EasyJSON */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		F9674B49C0A405CD1763C2F25911C825 /* Pods-EasyJSON_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0484E6AE21B4B3EA83DE7B39F9C2584A /* Info.plist */,
+				123FC68F0E65EB9BD8B4A6CF8C2E8A71 /* Pods-EasyJSON_Tests.modulemap */,
+				F2758EB181FEB9B1B674F549BBC5A087 /* Pods-EasyJSON_Tests-acknowledgements.markdown */,
+				957249613BD93A0FE4FD6A6E57704E04 /* Pods-EasyJSON_Tests-acknowledgements.plist */,
+				5A3EA87C0C329EFFD5218A654823576D /* Pods-EasyJSON_Tests-dummy.m */,
+				F732B0CA6F70BD063827DE521DB33030 /* Pods-EasyJSON_Tests-frameworks.sh */,
+				02D0DDE9613F47F637D3635C7ABD060A /* Pods-EasyJSON_Tests-resources.sh */,
+				01E808B16B92B833F97EF4137C24B4AE /* Pods-EasyJSON_Tests-umbrella.h */,
+				16649F18065BA058702378460D9617E7 /* Pods-EasyJSON_Tests.debug.xcconfig */,
+				EC0FE0698FAC68492CDA517B4A73E953 /* Pods-EasyJSON_Tests.release.xcconfig */,
+			);
+			name = "Pods-EasyJSON_Tests";
+			path = "Target Support Files/Pods-EasyJSON_Tests";
+			sourceTree = "<group>";
+		};
+		FA1112A052BD0C000B474612FC211A1A /* EasyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				DAE9A602FE2D6538C8EBC69915297C9A /* Classes */,
+			);
+			path = EasyJSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5AAE0BEDE171B05656A87DC88F2FF378 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D496C5519BEE18DFCDC7C0441F012DD4 /* Pods-EasyJSON_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EE5C38CD3BC1456AAA5C69AC3E54B00 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0FC534C28D8966EAF5A6D29762EE895 /* Pods-EasyJSON_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9D731FB0CFD6E740EECC7A77E8EC77F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				739A13434BB2B031E2EF5B7131139873 /* EasyJSON-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		105306326DC26591FF59B0056626D112 /* Pods-EasyJSON_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC8F6F78A79A7FB1E61B5BB526AC58CF /* Build configuration list for PBXNativeTarget "Pods-EasyJSON_Tests" */;
+			buildPhases = (
+				E4B942FC1936DC418A4AD4296CEC8C2A /* Sources */,
+				7D1D1B54D0234EB32F7E78A7DA45CF5D /* Frameworks */,
+				5AAE0BEDE171B05656A87DC88F2FF378 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-EasyJSON_Tests";
+			productName = "Pods-EasyJSON_Tests";
+			productReference = F15909E2CA88112517DDCD7D12960C63 /* Pods_EasyJSON_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		196ED5AC0FA24848B0C08797DF16C68A /* Pods-EasyJSON_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E19636A25855320F310D838E52FF0D5 /* Build configuration list for PBXNativeTarget "Pods-EasyJSON_Example" */;
+			buildPhases = (
+				FB075BF330DB262C39C973BCC470DFB7 /* Sources */,
+				E57491D46BF3BD1E6BD7B2BD42002DCE /* Frameworks */,
+				7EE5C38CD3BC1456AAA5C69AC3E54B00 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DB6B34393AD737AA8A376BE5D980074 /* PBXTargetDependency */,
+			);
+			name = "Pods-EasyJSON_Example";
+			productName = "Pods-EasyJSON_Example";
+			productReference = 110C2134D3CA5CF1B5A6AFBE280C8404 /* Pods_EasyJSON_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F706011EB358EFD9E8E92D3DB136B4D9 /* EasyJSON */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0533F9A6F94BB81ACC448B7B878BB0FF /* Build configuration list for PBXNativeTarget "EasyJSON" */;
+			buildPhases = (
+				38136CF6339C11F08239D52E3949A46E /* Sources */,
+				B062B9D2CDCDC74D7E7EC600EBBF4410 /* Frameworks */,
+				D9D731FB0CFD6E740EECC7A77E8EC77F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EasyJSON;
+			productName = EasyJSON;
+			productReference = D2AA0B81DC6B7FE30A69026DD5091E9F /* EasyJSON.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					105306326DC26591FF59B0056626D112 = {
+						LastSwiftMigration = 0800;
+					};
+					196ED5AC0FA24848B0C08797DF16C68A = {
+						LastSwiftMigration = 0800;
+					};
+					F706011EB358EFD9E8E92D3DB136B4D9 = {
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 877898795098D0F8ED41F5C3666CDCA1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F706011EB358EFD9E8E92D3DB136B4D9 /* EasyJSON */,
+				196ED5AC0FA24848B0C08797DF16C68A /* Pods-EasyJSON_Example */,
+				105306326DC26591FF59B0056626D112 /* Pods-EasyJSON_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38136CF6339C11F08239D52E3949A46E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43A1E57F719F0252705F9E8295C1385B /* EasyJSON-dummy.m in Sources */,
+				C91AFF2827E7AF0CE69C6A1D8B381639 /* JSONModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4B942FC1936DC418A4AD4296CEC8C2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F72761B4DC55D5C2575428CA031B6377 /* Pods-EasyJSON_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB075BF330DB262C39C973BCC470DFB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0A9C930E8BC82E953A311773A6E0FCA /* Pods-EasyJSON_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6DB6B34393AD737AA8A376BE5D980074 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EasyJSON;
+			target = F706011EB358EFD9E8E92D3DB136B4D9 /* EasyJSON */;
+			targetProxy = FCD2C9FBE40EDA28965618DA4818EECF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		22084E565AE7BDAAFF9F8A4B42FD9564 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3D0E179349A59881E3FC559C26FC902 /* Pods-EasyJSON_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyJSON_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyJSON_Example/Pods-EasyJSON_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_EasyJSON_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3BB06854614CEED30359A1F680FC2E03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16649F18065BA058702378460D9617E7 /* Pods-EasyJSON_Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyJSON_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyJSON_Tests/Pods-EasyJSON_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_EasyJSON_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		694ECD7F59D311DC3378AAB35EBC1F24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC0FE0698FAC68492CDA517B4A73E953 /* Pods-EasyJSON_Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyJSON_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyJSON_Tests/Pods-EasyJSON_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_EasyJSON_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7EC285392A5EFEC7F7D726D2BF84E2C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E12B4BF7A8F2D2A7444F419FA7701FF /* EasyJSON.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/EasyJSON/EasyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/EasyJSON/EasyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = EasyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8DED8AD26D381A6ACFF202E5217EC498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		987F87290C06410A0F90B53E9E62E3A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D30D1EF8E3ED4D0887EDFA9D214E076B /* Pods-EasyJSON_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyJSON_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyJSON_Example/Pods-EasyJSON_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_EasyJSON_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9E1E4E48AF2EAB23169E611BF694090A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		DD5508A4FDDDB2C6B8DEDD9DB3530A6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E12B4BF7A8F2D2A7444F419FA7701FF /* EasyJSON.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/EasyJSON/EasyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/EasyJSON/EasyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = EasyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0533F9A6F94BB81ACC448B7B878BB0FF /* Build configuration list for PBXNativeTarget "EasyJSON" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EC285392A5EFEC7F7D726D2BF84E2C5 /* Debug */,
+				DD5508A4FDDDB2C6B8DEDD9DB3530A6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E1E4E48AF2EAB23169E611BF694090A /* Debug */,
+				8DED8AD26D381A6ACFF202E5217EC498 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E19636A25855320F310D838E52FF0D5 /* Build configuration list for PBXNativeTarget "Pods-EasyJSON_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987F87290C06410A0F90B53E9E62E3A8 /* Debug */,
+				22084E565AE7BDAAFF9F8A4B42FD9564 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC8F6F78A79A7FB1E61B5BB526AC58CF /* Build configuration list for PBXNativeTarget "Pods-EasyJSON_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BB06854614CEED30359A1F680FC2E03 /* Debug */,
+				694ECD7F59D311DC3378AAB35EBC1F24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

@@ -1,0 +1,6 @@
+framework module Pods_EasyJSON_Tests {
+  umbrella header "Pods-EasyJSON_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
