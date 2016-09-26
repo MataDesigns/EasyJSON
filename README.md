@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 [![Platform](https://img.shields.io/cocoapods/p/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 
+EasyJSON is a simple JSON to Object.
+
+- [Features](#features)
 - [Usage](#usage)
     - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model), [Model To JSON](#model-to-json)
     - **Advanced -** [Custom Mapping](#custom-mapping), [Mapping SubObjects](#mapping-subobjects)
@@ -29,6 +32,11 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "EasyJSON"
 ```
+
+## Features
+
+- [x] Allow custom mapping to and from JSON
+- [x] Map properties that are also subclasses of JSONModel
 
 ## Usage
 
