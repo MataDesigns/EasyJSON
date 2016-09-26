@@ -7,7 +7,7 @@
 
 - [Usage](#usage)
     - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model), [Model To JSON](#model-to-json)
-    - **Advanced -** [Custom Mapping](#custom-mapping)
+    - **Advanced -** [Custom Mapping](#custom-mapping), [Mapping SubObjects](#mapping-subobjects)
 
 ## Example
 
@@ -26,14 +26,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "EasyJSON"
 ```
-
-## Author
-
-Nicholas Mata, NicholasMata94@gmail.com
-
-## License
-
-EasyJSON is available under the MIT license. See the LICENSE file for more info.
 
 ## Usage
 
@@ -95,6 +87,7 @@ print(json) // Prints ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 ### Custom Mapping
 
 #### From Json
+
 Now what about when your JSON is different from your property names?
 
 ```swift
@@ -125,6 +118,7 @@ print(person.lastName)  // Prints Doe
 ```
 
 #### To Json
+
 Now what about when you want it to output JSON different from your property names?
 
 ```swift
@@ -151,4 +145,62 @@ let json = person.toJson()
 print(json) // Prints ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
 ```
 
+### Mapping SubObjects
 
+Now lets say you have something like this.
+
+```swift
+class Student: JSONModel {
+    var id: Int = -1
+    var firstName: String?
+    var lastName: String?
+}
+
+class Classroom: JSONModel {
+    var id: Int = -1
+    var name: String?
+    var students: [Student]?
+}
+```
+And your JSON looks something like this
+
+```json
+{
+	id: 1,
+	name: "Computer Science",
+	students : [{
+		id: 1,
+		firstName: "Nicholas"
+		lastName: "Mata"
+	}, 
+	{
+		id:2,
+		firstName: "Jane",
+		lastName: "Doe"
+	}]
+}
+```
+It is as simple as adding
+
+```swift
+class Classroom: JSONModel {
+    
+    // Properties
+    
+    // This is where the magic happens!
+    required init() {
+        super.init()
+        subObjects = ["students", Student.self]
+    }
+}
+```
+Now Classroom will also fill the students property when given JSON.
+
+
+## Author
+
+Nicholas Mata, NicholasMata94@gmail.com
+
+## License
+
+EasyJSON is available under the MIT license. See the LICENSE file for more info.
