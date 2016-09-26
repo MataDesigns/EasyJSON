@@ -170,7 +170,7 @@ And your JSON looks something like this
 	"name": "Computer Science",
 	"students": [{
 		"id": 1,
-		"firstName": "Nicholas"
+		"firstName": "Nicholas",
 		"lastName": "Mata"
 	}, 
 	{
