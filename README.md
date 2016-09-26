@@ -166,17 +166,17 @@ And your JSON looks something like this
 
 ```json
 {
-	id: 1,
-	name: "Computer Science",
-	students : [{
-		id: 1,
-		firstName: "Nicholas"
-		lastName: "Mata"
+	"id": 1,
+	"name": "Computer Science",
+	"students": [{
+		"id": 1,
+		"firstName": "Nicholas"
+		"lastName": "Mata"
 	}, 
 	{
-		id:2,
-		firstName: "Jane",
-		lastName: "Doe"
+		"id":2,
+		"firstName": "Jane",
+		"lastName": "Doe"
 	}]
 }
 ```
