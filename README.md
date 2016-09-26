@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 
 - [Usage](#usage)
-- **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model)
+    - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model)
 
 ## Example
 
