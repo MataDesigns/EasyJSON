@@ -11,9 +11,9 @@ import UIKit
 
 /// Allows for json to be transformed into a object, and vice-versa.
 /// It is as simple as creating a object that has JSONModel as a subclass.
-open class JSONModel: NSObject {
+public class JSONModel: NSObject {
     
-    open var jsonTimeFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    public var jsonTimeFormat = "yyyy-MM-dd'T'HH:mm:ss"
     
     /**
      A dictionary which provides a way to create json
@@ -41,7 +41,7 @@ open class JSONModel: NSObject {
      ["first": "Jane", "last": "Doe"]
      ```
      */
-    open var mapToJson: [String: String]?
+    public var mapToJson: [String: String]?
     
     
     /**
@@ -70,7 +70,7 @@ open class JSONModel: NSObject {
      ["firstName": "Jane", "lastName": "Doe"]
      ```
      */
-    open var mapFromJson: [String: Any]?
+    public var mapFromJson: [String: Any]?
     
     /**
      Allows you to specify sub-objects, see example for better understanding.
@@ -96,7 +96,7 @@ open class JSONModel: NSObject {
      ```
      ["time": "2016-09-20T08:00:00", "person": ["firstName": "Jane", "lastName": "Doe"]]
      */
-    open var subObjects: [String: AnyClass]?
+    public var subObjects: [String: AnyClass]?
     
     required override public init() {
         
@@ -110,7 +110,7 @@ open class JSONModel: NSObject {
      
      - returns: A UIImage that the string represented.
      */
-    func imageFor(_ base64String: String?) -> UIImage? {
+    public func imageFor(_ base64String: String?) -> UIImage? {
         if let imageString = base64String {
             guard !imageString.isEmpty else {
                 return nil
@@ -124,7 +124,7 @@ open class JSONModel: NSObject {
      
      - returns: json representation of the object.
      */
-    open func toJson() -> [String: Any] {
+    public func toJson() -> [String: Any] {
         var json = [String: Any]()
         for key in propertyNames() {
             var jsonKey = key
@@ -141,7 +141,7 @@ open class JSONModel: NSObject {
     /// Fills the properties of an object with json.
     ///
     /// - parameter json: [String: Any] representing json.
-    func fill(withJson json: [String: Any]) {
+    public func fill(withJson json: [String: Any]) {
         for propertyName in propertyNames() {
             // Set the json key to be the name of the property.
             var jsonKey = propertyName
@@ -166,7 +166,7 @@ open class JSONModel: NSObject {
     }
     
     // MARK: - Helper Functions
-    fileprivate func fill(withKey key:String, value: Any, property: String) {
+    private func fill(withKey key:String, value: Any, property: String) {
         switch value {
         case is NSNull:
             self.setValue("", forKey: property)
@@ -181,7 +181,7 @@ open class JSONModel: NSObject {
         }
     }
     
-    fileprivate func handleString(_ string: String,_ property: String) {
+    private func handleString(_ string: String,_ property: String) {
         if let date = Date.from(string) {
             self.setValue(date, forKey: property)
         }else if let date = Date.from(string, format: "hh:mm:ss") {
@@ -191,7 +191,7 @@ open class JSONModel: NSObject {
         }
     }
     
-    fileprivate func handleCustomObjects(_ attribute: Any, _ property: String, type: AnyClass) {
+    private func handleCustomObjects(_ attribute: Any, _ property: String, type: AnyClass) {
         if type is JSONModel.Type {
             if let array = attribute as? [[String: Any]] {
                 var modelObjects = [JSONModel]()
@@ -212,7 +212,7 @@ open class JSONModel: NSObject {
         
     }
     
-    fileprivate func mapArray(_ json: [String: Any], map :[String]) -> Any? {
+    private func mapArray(_ json: [String: Any], map :[String]) -> Any? {
         var value: [String: Any] = json
         for key in map {
             if value[key] is [String: Any] {
@@ -224,7 +224,7 @@ open class JSONModel: NSObject {
         return nil
     }
     
-    fileprivate func propertyNames() -> Array<String> {
+    private func propertyNames() -> Array<String> {
         var results: Array<String> = [];
         
         var count: UInt32 = 0;
@@ -263,17 +263,5 @@ extension Date {
         formatter.dateFormat = format
         formatter.timeZone = TimeZone.autoupdatingCurrent
         return formatter.string(from: self)
-    }
-}
-
-extension Dictionary {
-    func mergedWith(_ otherDictionary: [Key: Value]) -> [Key: Value] {
-        var mergedDict: [Key: Value] = [:]
-        [self, otherDictionary].forEach { dict in
-            for (key, value) in dict {
-                mergedDict[key] = value
-            }
-        }
-        return mergedDict
     }
 }
