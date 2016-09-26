@@ -10,8 +10,11 @@
     - **Advanced -** [Custom Mapping](#custom-mapping), [Mapping SubObjects](#mapping-subobjects)
 
 ## Example
+**NOT IMPLEMENTED YET (LOOK AT USAGE FOR HELP)**
 
+<!---
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
+-->
 
 ## Requirements
 - iOS 9.0+
