@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 [![Platform](https://img.shields.io/cocoapods/p/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 
-EasyJSON is a simple JSON to Object.
+EasyJSON is a simple JSON to Object mapper.
 
 - [Features](#features)
 - [Usage](#usage)
