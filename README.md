@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 
 - [Usage](#usage)
-    - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model)
+    - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model), [Model To JSON](#model-to-json)
 
 ## Example
 
@@ -36,7 +36,9 @@ EasyJSON is available under the MIT license. See the LICENSE file for more info.
 
 ## Usage
 
-### Creating Model
+### Intro
+
+#### Creating Model
 
 ```swift
 import EasyJSON
@@ -47,15 +49,12 @@ class Person: JSONModel {
 }
 ```
 
-### Filling Model
+#### Filling Model
 
 ```swift
 import EasyJSON
 
-class Person: JSONModel {
-    var firstName: String?
-    var lastName: String?
-}
+// Person Model
 
 let json = ["firstName": "Jane", "lastName": "Doe"]
 let person = Person()
@@ -65,4 +64,12 @@ print(person.firstName) // Prints Jane
 print(person.lastName)  // Prints Doe
 ```
 
+#### Model To JSON
+
+```swift
+import EasyJSON
+
+let json = person.toJson()
+print(json) // Prints ["firstName": "Jane", "lastName": "Doe"]
+```
 
