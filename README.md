@@ -7,6 +7,7 @@
 
 - [Usage](#usage)
     - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model), [Model To JSON](#model-to-json)
+    - **Advanced -** [Custom Mapping](#custom-mapping)
 
 ## Example
 
@@ -40,10 +41,15 @@ EasyJSON is available under the MIT license. See the LICENSE file for more info.
 
 #### Creating Model
 
+Just create a class whos subclass is a JSONModel.
+
+**IMPORTANT** Properties that are type **Int** need a default value.
+
 ```swift
 import EasyJSON
 
 class Person: JSONModel {
+    var id: Int = -1
     var firstName: String?
     var lastName: String?
 }
@@ -51,15 +57,26 @@ class Person: JSONModel {
 
 #### Filling Model
 
+To go from JSON to Model.
+
+1. Create a empty Model
+2. Call fill(withJson:)
+3. Your model is now filled with the information from the dictionary.
+
+**So long as the keys match the property name exactly.**
+
+If your Dictionary keys are different from the property names go to [Custom Mapping](#custom-mapping).
+
 ```swift
 import EasyJSON
 
 // Person Model
 
-let json = ["firstName": "Jane", "lastName": "Doe"]
+let json = ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 let person = Person()
 person.fill(withJson: json)
 
+print(person.id)        // Prints 1
 print(person.firstName) // Prints Jane
 print(person.lastName)  // Prints Doe
 ```
@@ -70,6 +87,68 @@ print(person.lastName)  // Prints Doe
 import EasyJSON
 
 let json = person.toJson()
-print(json) // Prints ["firstName": "Jane", "lastName": "Doe"]
+print(json) // Prints ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 ```
+
+## Advanced
+
+### Custom Mapping
+
+#### From Json
+Now what about when your JSON is different from your property names?
+
+```swift
+import EasyJSON
+
+class Person: JSONModel {
+    var id: Int = -1
+    var firstName: String?
+    var lastName: String?
+    
+    required init() {
+        super.init()
+        mapFromJson = ["PersonID", "id"]
+    }
+}
+```
+Then you can now use the following json to fill then object.
+
+```swift
+let json = ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
+
+let person = Person()
+person.fill(withJson: json)
+
+print(person.id)        // Prints 1
+print(person.firstName) // Prints Jane
+print(person.lastName)  // Prints Doe
+```
+
+#### To Json
+Now what about when you want it to output JSON different from your property names?
+
+```swift
+import EasyJSON
+
+class Person: JSONModel {
+    var id: Int = -1
+    var firstName: String?
+    var lastName: String?
+    
+    required init() {
+        super.init()
+        mapToJson = ["id", "PersonID"]
+    }
+}
+```
+
+Then you can now use the following json to fill then object.
+
+```swift
+import EasyJSON 
+
+let json = person.toJson()
+print(json) // Prints ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
+```
+
 
