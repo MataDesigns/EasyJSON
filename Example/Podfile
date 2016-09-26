@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EasyJSON_Example' do
+  pod 'EasyJSON', :path => '../'
+
+  target 'EasyJSON_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
