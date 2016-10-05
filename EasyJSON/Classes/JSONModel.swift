@@ -43,6 +43,12 @@ public class JSONModel: NSObject {
      */
     public var mapToJson: [String: String]?
     
+    /**
+     An array of property names which you would like to exclude when turning
+     Model into JSON.
+     */
+    public var excludeFromJson: [String]?
+    
     
     /**
      It has a similiar functionality as mapToJson however.
@@ -127,6 +133,9 @@ public class JSONModel: NSObject {
     public func toJson() -> [String: Any] {
         var json = [String: Any]()
         for key in propertyNames() {
+            if let exclude = excludeFromJson , exclude.contains(key) {
+                continue
+            }
             var jsonKey = key
             // Handle custom mappings
             if let newKey = mapToJson?[key] {
