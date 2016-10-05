@@ -138,6 +138,9 @@ public class JSONModel: NSObject {
             }
             var jsonKey = key
             // Handle custom mappings
+            if let newKey = mapToJson?[key] {
+                jsonKey = newKey
+            }
             let propertyValue = self.value(forKey: key) as Any
             if let jsonModel = propertyValue as? JSONModel {
                 json[jsonKey] = jsonModel.toJson()
