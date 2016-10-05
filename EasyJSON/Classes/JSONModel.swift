@@ -138,10 +138,19 @@ public class JSONModel: NSObject {
             }
             var jsonKey = key
             // Handle custom mappings
-            if let newKey = mapToJson?[key] {
-                jsonKey = newKey
+            let propertyValue = self.value(forKey: key) as Any
+            if let jsonModel = propertyValue as? JSONModel {
+                json[jsonKey] = jsonModel.toJson()
+            } else if let jsonModels = propertyValue as? [JSONModel] {
+                var models = [[String: Any]]()
+                for jsonModel in jsonModels {
+                    models.append(jsonModel.toJson())
+                }
+                json[jsonKey] = models
+            } else
+            {
+                json[jsonKey] = propertyValue
             }
-            json[jsonKey] = self.value(forKey: key) as AnyObject?
         }
         return json
     }
