@@ -14,38 +14,70 @@ class BasicUser {
     var lastName: String!
 }
 
+class AddressInfo: EasyModel {
+    var street: String?
+    var city: String?
+}
+
 class UserModel: EasyModel {
-    override var jsonTimeFormat: String {
-        return "hh:ss"
-    }
+    //    override var jsonTimeFormat: String {
+    //        return "hh:ss"
+    //    }
     
     var id: Int = -1
-    var firstName: String!
+    var firstName: String?
     var middleName: String?
-    var lastName: String!
+    var lastName: String?
+    
+    var addressInfo: AddressInfo?
+    
+    var createdOn: Date?
+    
+    var isNew: Bool = false
+    
+    override var subObjects: [String : AnyClass] {
+        return ["addressInfo": AddressInfo.self]
+    }
 }
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let user : [String: Any?] = ["id" : 0, "firstName" : "Nicholas", "lastName" : "Mata"]
+        let user : [String: Any?] = [
+            "id" : 0,
+            "firstName" : "Nicholas",
+            "middleName": nil,
+            "lastName" : "Mata",
+            "isNew" : true,
+            "addressInfo": [
+                "street": "355 Western Drive Apt C",
+                "city": "Santa Cruz"],
+            "createdOn": Date()
+        ]
+        
         let model = UserModel()
+        model.fill(withDict: user)
+        
+        print("First Name: \(model.firstName!)")
+        
+        let jsonUserString = "{ \"firstName\" : \"Nicholas\"}"
+        let modelFromString = UserModel()
         do {
-        try model.fill(with: user)
-        } catch let error {
-            print(error)
+            try modelFromString.fill(withJson: jsonUserString)
+            print("First Name: \(modelFromString.firstName!)")
+        } catch {
+            
         }
-        let basicUser = BasicUser()
-        basicUser.firstName = model.firstName
-        basicUser.lastName = model.lastName
+        
+        print(model.toJson())
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 
