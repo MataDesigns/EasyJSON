@@ -1,5 +1,5 @@
 //
-//  JSONModel.swift
+//  EasyModel.swift
 //  EasyJSON
 //
 //  Created by Nicholas Mata on 9/20/16.
@@ -9,11 +9,17 @@
 import Foundation
 import UIKit
 
+enum EasyModelError: Error {
+    case invalidModel(String)
+}
+
 /// Allows for json to be transformed into a object, and vice-versa.
-/// It is as simple as creating a object that has JSONModel as a subclass.
-public class JSONModel: NSObject {
+/// It is as simple as creating a object that has EasyModel as a subclass.
+open class EasyModelOLD: NSObject {
     
-    public var jsonTimeFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    open var jsonTimeFormat :String  {
+        return "yyyy-MM-dd'T'HH:mm:ss"
+    }
     
     /**
      A dictionary which provides a way to create json
@@ -21,7 +27,7 @@ public class JSONModel: NSObject {
      
      Example:
      ```
-     class Person: JSONModel {
+     class Person: EasyModel {
      var firstName: String?
      var lastName: String?
      }
@@ -41,13 +47,19 @@ public class JSONModel: NSObject {
      ["first": "Jane", "last": "Doe"]
      ```
      */
-    public var mapToJson: [String: String]?
+    open var mapToJson: [String: String] {
+        return [:]
+    }
     
     /**
      An array of property names which you would like to exclude when turning
      Model into JSON.
      */
-    public var excludeFromJson: [String]?
+    open var excludes: [String] {
+        return []
+    }
+    
+    var allExcludes: [String] = ["jsonTimeFormat", "excludes", "mapToJson", "mapFromJson", "subObjects"]
     
     
     /**
@@ -56,7 +68,7 @@ public class JSONModel: NSObject {
      
      Example:
      ```
-     class Person: JSONModel {
+     class Person: EasyModel {
      var first: String?
      var last: String?
      }
@@ -76,19 +88,21 @@ public class JSONModel: NSObject {
      ["firstName": "Jane", "lastName": "Doe"]
      ```
      */
-    public var mapFromJson: [String: Any]?
+    open var mapFromJson: [String: String]  {
+        return [:]
+    }
     
     /**
      Allows you to specify sub-objects, see example for better understanding.
      
      Example:
      ```
-     class Person: JSONModel {
+     class Person: EasyModel {
      var firstName: String?
      var lastName: String?
      }
      
-     class Appointment: JSONModel {
+     class Appointment: EasyModel {
      var time: Date!
      var person: Person
      }
@@ -102,7 +116,9 @@ public class JSONModel: NSObject {
      ```
      ["time": "2016-09-20T08:00:00", "person": ["firstName": "Jane", "lastName": "Doe"]]
      */
-    public var subObjects: [String: AnyClass]?
+    open var subObjects: [String: AnyClass] {
+        return [:]
+    }
     
     required override public init() {
         
@@ -131,20 +147,21 @@ public class JSONModel: NSObject {
      - returns: json representation of the object.
      */
     public func toJson() -> [String: Any] {
+        allExcludes.append(contentsOf: excludes)
         var json = [String: Any]()
-        for key in propertyNames() {
-            if let exclude = excludeFromJson , exclude.contains(key) {
+        for (key, mirror) in propertyMirrors() {
+            if allExcludes.contains(key) {
                 continue
             }
             var jsonKey = key
             // Handle custom mappings
-            if let newKey = mapToJson?[key] {
+            if let newKey = mapToJson[key] {
                 jsonKey = newKey
             }
             let propertyValue = self.value(forKey: key) as Any
-            if let jsonModel = propertyValue as? JSONModel {
+            if let jsonModel = propertyValue as? EasyModel {
                 json[jsonKey] = jsonModel.toJson()
-            } else if let jsonModels = propertyValue as? [JSONModel] {
+            } else if let jsonModels = propertyValue as? [EasyModel] {
                 var models = [[String: Any]]()
                 for jsonModel in jsonModels {
                     models.append(jsonModel.toJson())
@@ -162,13 +179,13 @@ public class JSONModel: NSObject {
     /// Fills the properties of an object with json.
     ///
     /// - parameter json: [String: Any] representing json.
-    public func fill(withJson json: [String: Any]) {
-        for propertyName in propertyNames() {
+    public func fill(with json: [String: Any]) throws {
+        for (propertyName, mirror) in propertyMirrors() {
+            //print("\(propertyName) \(mirror.subjectType)")
             // Set the json key to be the name of the property.
             var jsonKey = propertyName
-            print(Mirror(reflecting: self.value(forKey: propertyName)).subjectType)
             var customValue: Any? = nil
-            if let newProperty = mapFromJson?[propertyName] {
+            if let newProperty = mapFromJson[propertyName] {
                 if newProperty is String{
                     jsonKey = newProperty as! String
                 } else {
@@ -177,27 +194,37 @@ public class JSONModel: NSObject {
             }
             
             if customValue != nil {
-                fill(withKey: jsonKey, value: customValue, property: propertyName)
+                try fill(withKey: jsonKey, value: customValue, property: propertyName)
+                continue
             }
             
             if let value = json[jsonKey] {
-                fill(withKey: jsonKey, value: value, property: propertyName)
+                try fill(withKey: jsonKey, value: value, property: propertyName)
+                continue
+            }
+            
+            if  mirror.displayStyle != .optional {
+                throw EasyModelError.invalidModel("\(propertyName) set to none optional but isn't inside JSON.")
             }
         }
     }
     
     // MARK: - Helper Functions
-    private func fill(withKey key:String, value: Any, property: String) {
+    private func fill(withKey key:String, value: Any?, property: String) throws {
         switch value {
         case is NSNull:
-            self.setValue("", forKey: property)
+            setValue("", forKey: property)
         case is String:
             handleString(value as! String, property)
+        case is Int:
+            if let final = value as? Int {
+                setValue(final, forKey: property)
+            }
         default:
-            if let type = subObjects?[key] {
-                handleCustomObjects(value, property, type: type)
+            if let type = subObjects[key] {
+                try handleCustomObjects(value, property, type: type)
             } else {
-                self.setValue(value, forKey: property)
+                setValue(value, forKey: property)
             }
         }
     }
@@ -212,21 +239,21 @@ public class JSONModel: NSObject {
         }
     }
     
-    private func handleCustomObjects(_ attribute: Any, _ property: String, type: AnyClass) {
-        if type is JSONModel.Type {
+    private func handleCustomObjects(_ attribute: Any, _ property: String, type: AnyClass) throws {
+        if type is EasyModel.Type {
             if let array = attribute as? [[String: Any]] {
-                var modelObjects = [JSONModel]()
+                var modelObjects = [EasyModel]()
                 for jsonObject in array {
-                    let objc = (type as! JSONModel.Type).init()
-                    objc.fill(withJson: jsonObject )
+                    let objc = (type as! EasyModel.Type).init()
+                    try objc.fill(with: jsonObject)
                     modelObjects.append(objc)
                 }
                 if modelObjects.count > 0 {
                     self.setValue(modelObjects, forKey: property)
                 }
             } else {
-                let objc = (type as! JSONModel.Type).init()
-                objc.fill(withJson: attribute as! [String: Any])
+                let objc = (type as! EasyModel.Type).init()
+                try objc.fill(with: attribute as! [String: Any])
                 self.setValue(objc, forKey: property)
             }
         }
@@ -245,29 +272,17 @@ public class JSONModel: NSObject {
         return nil
     }
     
-    private func propertyNames() -> Array<String> {
-        var results: Array<String> = [];
+    private func propertyMirrors() -> [(String, Mirror)] {
+        var results: [(String, Mirror)] = []
         
-        var count: UInt32 = 0;
-        let myClass: AnyClass = self.classForCoder;
-        // Get the properties for the class via the class_copyPropertyList function
-        let properties = class_copyPropertyList(myClass, &count);
-        // Iterate each objc_property_t struct
-        for i: UInt32 in 0 ..< count {
-            // Get the property's objc_property_t
-            let property = properties?[Int(i)]
-            // Get the property name by calling property_getName function
-            let cname = property_getName(property)
-            // Covert the CString into a Swift string
-            let name = String.init(cString: cname!)
-            
-            results.append(name);
+        for child in Mirror(reflecting: self).children
+        {
+            if let name = child.label{
+                results.append((name, Mirror(reflecting: child.value)))
+            }
         }
         
-        // Release objc_property_t
-        free(properties);
-        
-        return results;
+        return results
     }
 }
 
