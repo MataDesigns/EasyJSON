@@ -9,22 +9,15 @@
 import UIKit
 import EasyJSON
 
-class BasicUser {
-    var firstName: String!
-    var lastName: String!
-}
-
 class AddressInfo: EasyModel {
     var street: String?
     var city: String?
 }
 
 class UserModel: EasyModel {
-    //    override var jsonTimeFormat: String {
-    //        return "hh:ss"
-    //    }
     
     var id: Int = -1
+    
     var firstName: String?
     var middleName: String?
     var lastName: String?
@@ -60,13 +53,11 @@ class ViewController: UIViewController {
         let model = UserModel()
         model.fill(withDict: user)
         
-        print("First Name: \(model.firstName!)")
         
         let jsonUserString = "{ \"firstName\" : \"Nicholas\"}"
         let modelFromString = UserModel()
         do {
             try modelFromString.fill(withJson: jsonUserString)
-            print("First Name: \(modelFromString.firstName!)")
         } catch {
             
         }

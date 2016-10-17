@@ -1,9 +1,9 @@
 {
   "name": "EasyJSON",
-  "version": "0.1.0",
-  "summary": "A short description of EasyJSON.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/EasyJSON",
+  "version": "0.2.1",
+  "summary": "A simple and fast way to turn JSON dictionary into a Swift Object.",
+  "description": "A simple way for turn JSON dictionaries into Swift Object.\nAll that you have to do is create a class who's subclass is JSONModel, then call fill(withJson:) to fill the properties of the object and\ntoJson() to turn the object back into JSON.",
+  "homepage": "https://github.com/NicholasMata/EasyJSON",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +12,15 @@
     "Nicholas Mata": "NicholasMata94@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/EasyJSON.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/NicholasMata/EasyJSON.git",
+    "tag": "0.2.1"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
-  "source_files": "EasyJSON/Classes/**/*"
+  "source_files": "EasyJSON/Classes/**/*",
+  "frameworks": [
+    "Foundation",
+    "UIKit"
+  ]
 }

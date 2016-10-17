@@ -1,16 +1,16 @@
 PODS:
-  - EasyJSON (0.1.0)
+  - EasyJSON (0.2.1)
 
 DEPENDENCIES:
   - EasyJSON (from `../`)
 
 EXTERNAL SOURCES:
   EasyJSON:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  EasyJSON: b56d6e06d9f57d87c0ea2f33bf12dff002e5cd51
+  EasyJSON: a9bf6304de3ed006d6a990545c7370edaf4e9d02
 
 PODFILE CHECKSUM: dfa2416ceab379f3959319213a913580f59a9d02
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.0.rc.3
