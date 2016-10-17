@@ -46,7 +46,10 @@ class Tests: XCTestCase {
         
         model.fill(withDict: json)
         
-        XCTAssert(model.id != -1, "Pass")
+        XCTAssert(model.id != -1, "Parse ID")
+        
+        let jsonDict = model.toJson()
+        XCTAssert(jsonDict["id"] as! Int == 0, "id To Json")
     }
     
     func testStringParse() {
@@ -57,9 +60,14 @@ class Tests: XCTestCase {
         ]
         
         model.fill(withDict: json)
-        XCTAssert(model.firstName == "Nicholas", "Pass")
-        XCTAssert(model.middleName == nil, "Pass")
-        XCTAssert(model.lastName == "Mata", "Pass")
+        XCTAssert(model.firstName == "Nicholas", "Parse First Name")
+        XCTAssert(model.middleName == nil      , "Parse Middle Name")
+        XCTAssert(model.lastName == "Mata"     , "Parse LastName")
+        
+        let jsonDict = model.toJson()
+        XCTAssert(jsonDict["firstName"] as! String == "Nicholas", "firstName To Json")
+        XCTAssert(jsonDict["middleName"] == nil                 , "middleName To Json")
+        XCTAssert(jsonDict["lastName"] as! String == "Mata"     , "lastName To Json")
     }
     
     func testDateParse() {
