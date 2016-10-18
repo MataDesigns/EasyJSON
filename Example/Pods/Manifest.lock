@@ -1,5 +1,7 @@
 PODS:
-  - EasyJSON (0.2.1)
+  - Alamofire (4.0.1)
+  - EasyJSON (0.2.1):
+    - Alamofire
 
 DEPENDENCIES:
   - EasyJSON (from `../`)
@@ -9,7 +11,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  EasyJSON: a9bf6304de3ed006d6a990545c7370edaf4e9d02
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  EasyJSON: e260b3e80b167347dc76f5a8f57654d378945153
 
 PODFILE CHECKSUM: dfa2416ceab379f3959319213a913580f59a9d02
 

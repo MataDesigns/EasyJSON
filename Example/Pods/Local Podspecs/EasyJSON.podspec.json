@@ -22,5 +22,10 @@
   "frameworks": [
     "Foundation",
     "UIKit"
-  ]
+  ],
+  "dependencies": {
+    "Alamofire": [
+
+    ]
+  }
 }

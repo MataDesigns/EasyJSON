@@ -136,13 +136,9 @@ open class EasyModel: NSObject {
      
      */
     public func fill(withJson jsonString: String) throws {
-        do {
-            let jsonData = jsonString.data(using: .utf8)
-            let parsedData = try JSONSerialization.jsonObject(with: jsonData!, options: .allowFragments) as! [String : Any]
-            fill(withDict: parsedData)
-        } catch let error as NSError {
-            print(error)
-        }
+        let jsonData = jsonString.data(using: .utf8)
+        let parsedData = try JSONSerialization.jsonObject(with: jsonData!, options: .allowFragments) as! [String : Any]
+        fill(withDict: parsedData)
     }
     
     /**
@@ -205,7 +201,7 @@ open class EasyModel: NSObject {
             }
             
             var jsonKey = mapToJson[key] != nil ? mapToJson[key]! : key
-
+            
             let propertyValue = self.value(forKey: key) as Any?
             
             switch propertyValue {
@@ -268,7 +264,7 @@ open class EasyModel: NSObject {
         }else if let date = Date.from(string, format: "hh:mm:ss") {
             self.setValue(date, forKey: property)
         } else {
-            self.setValue(string, forKey: property)
+            self.setValue(string as! String, forKey: property)
         }
     }
     
@@ -278,7 +274,7 @@ open class EasyModel: NSObject {
      of the object.
      
      - returns:
-        A dictionary where key is the property name and value is the mirror for the property.
+     A dictionary where key is the property name and value is the mirror for the property.
      
      */
     private func propertyMirrors() -> [(String, Mirror)] {
