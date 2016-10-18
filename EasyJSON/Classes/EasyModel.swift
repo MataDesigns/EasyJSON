@@ -149,7 +149,7 @@ open class EasyModel: NSObject {
      */
     public func fill(withDict jsonDict: [String: Any?]) {
         for (name, mirror) in propertyMirrors() {
-            var jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : name
+            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : name
             
             if let value = jsonDict[jsonKey] {
                 if let subObjectType = subObjects[name] {
@@ -172,8 +172,8 @@ open class EasyModel: NSObject {
                     setValue(value as! Int, forKey: name)
                 case is Date:
                     setValue(value as! Date, forKey: name)
-                case let jsonModel as [String: Any]:
-                    print("WARNING EasyModel !!!: Could not fill sub object named \(name)")
+                case is [String: Any]:
+                    print("WARNING EasyModel !!! Property named \"\(name)\" needs definition in subObjects.")
                 case nil:
                     if mirror.displayStyle == .optional {
                         setValue(nil, forKey: name)
@@ -200,7 +200,7 @@ open class EasyModel: NSObject {
                 continue
             }
             
-            var jsonKey = mapToJson[key] != nil ? mapToJson[key]! : key
+            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : key
             
             let propertyValue = self.value(forKey: key) as Any?
             
@@ -264,7 +264,7 @@ open class EasyModel: NSObject {
         }else if let date = Date.from(string, format: "hh:mm:ss") {
             self.setValue(date, forKey: property)
         } else {
-            self.setValue(string as! String, forKey: property)
+            self.setValue(string, forKey: property)
         }
     }
     
