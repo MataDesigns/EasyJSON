@@ -1,6 +1,6 @@
 # EasyJSON
 
-[![CI Status](http://img.shields.io/travis/Nicholas Mata/EasyJSON.svg?style=flat)](https://travis-ci.org/Nicholas Mata/EasyJSON)
+[![CI Status](http://img.shields.io/travis/Nicholas%20Mata/EasyJSON.svg?style=flat)](https://travis-ci.org/Nicholas%20Mata/EasyJSON)
 [![Version](https://img.shields.io/cocoapods/v/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 [![License](https://img.shields.io/cocoapods/l/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 [![Platform](https://img.shields.io/cocoapods/p/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
