@@ -51,7 +51,7 @@ Just create a class whos subclass is a JSONModel.
 ```swift
 import EasyJSON
 
-class Person: JSONModel {
+class Person: EasyModel {
     var id: Int = -1
     var firstName: String?
     var lastName: String?
@@ -104,7 +104,7 @@ Now what about when your JSON is different from your property names?
 ```swift
 import EasyJSON
 
-class Person: JSONModel {
+class Person: EasyModel {
     var id: Int = -1
     var firstName: String?
     var lastName: String?
@@ -135,7 +135,7 @@ Now what about when you want it to output JSON different from your property name
 ```swift
 import EasyJSON
 
-class Person: JSONModel {
+class Person: EasyModel {
     var id: Int = -1
     var firstName: String?
     var lastName: String?
@@ -161,13 +161,13 @@ print(json) // Prints ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
 Now lets say you have something like this.
 
 ```swift
-class Student: JSONModel {
+class Student: EasyModel {
     var id: Int = -1
     var firstName: String?
     var lastName: String?
 }
 
-class Classroom: JSONModel {
+class Classroom: EasyModel {
     var id: Int = -1
     var name: String?
     var students: [Student]?
@@ -194,7 +194,7 @@ And your JSON looks something like this
 It is as simple as adding
 
 ```swift
-class Classroom: JSONModel {
+class Classroom: EasyModel {
     
     // Properties
     
