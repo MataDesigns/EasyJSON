@@ -1,6 +1,0 @@
-framework module EasyJSON {
-  umbrella header "EasyJSON-umbrella.h"
-
-  export *
-  module * { export * }
-}
