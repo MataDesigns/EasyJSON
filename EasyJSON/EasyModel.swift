@@ -21,6 +21,13 @@ open class EasyModel: NSObject {
     }
     
     /**
+     Whether dates are UTC
+     */
+    open var isUTC: Bool {
+        return false
+    }
+    
+    /**
      Provides a way to map json keys that are different from the property name.
      
      Example:
@@ -46,9 +53,7 @@ open class EasyModel: NSObject {
      ```
      */
     open var mapFromJson: [String: String] {
-        get {
-            return [:]
-        }
+        return [:]
     }
     
     /**
@@ -167,7 +172,7 @@ open class EasyModel: NSObject {
                 case is Bool:
                     setValue(value as! Bool, forKey: name)
                 case is String:
-                    handleString(value as! String, name)
+                    handleString(value as! String, name, mirror)
                 case is Int:
                     setValue(value as! Int, forKey: name)
                 case is Date:
@@ -256,11 +261,13 @@ open class EasyModel: NSObject {
     /**
      Handles a string value but checking for dates in the specified format.
      */
-    private func handleString(_ string: String,_ property: String) {
-        if let date = Date.from(string, format: self.timeFormat) {
-            self.setValue(date, forKey: property)
-        }else if let date = Date.from(string, format: "hh:mm:ss") {
-            self.setValue(date, forKey: property)
+    private func handleString(_ string: String,_ property: String, _ mirror: Mirror) {
+        if mirror.subjectType == Date!.self || mirror.subjectType == Date?.self {
+            if let date = Date.from(string, format: timeFormat, timeZone: isUTC ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
+                self.setValue(date, forKey: property)
+            }else if let date = Date.from(string, format: "HH:mm:ss", timeZone: isUTC ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
+                self.setValue(date, forKey: property)
+            }
         } else {
             self.setValue(string, forKey: property)
         }
@@ -290,17 +297,17 @@ open class EasyModel: NSObject {
 }
 
 extension Date {
-    static func from(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss") -> Date?  {
+    static func from(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss", timeZone: TimeZone = .autoupdatingCurrent) -> Date?  {
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.timeZone = timeZone
         return formatter.date(from: string)
     }
     
-    func dateString(_ format: String = "MM/dd/yyyy HH:mm a") -> String {
+    func dateString(_ format: String = "MM/dd/yyyy HH:mm a", timeZone: TimeZone = .autoupdatingCurrent) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        formatter.timeZone = TimeZone.autoupdatingCurrent
+        formatter.timeZone = timeZone
         return formatter.string(from: self)
     }
 }

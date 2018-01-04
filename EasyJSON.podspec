@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyJSON'
-  s.version          = '0.4.0'
+  s.version          = '0.4.1'
   s.summary          = 'A simple and fast way to turn JSON dictionary or string into a Swift Object.'
 
 # This description is used to generate tags and improve search results.
@@ -23,10 +23,10 @@ All that you have to do is create a class who's subclass is JSONModel, then call
 toJson() to turn the object back into JSON.
                        DESC
 
-  s.homepage         = 'https://github.com/NicholasMata/EasyJSON'
+  s.homepage         = 'https://github.com/MataDesigns/EasyJSON'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Nicholas Mata' => 'NicholasMata94@gmail.com' }
-  s.source           = { :git => 'https://github.com/NicholasMata/EasyJSON.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/MataDesigns/EasyJSON.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
 

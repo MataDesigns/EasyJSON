@@ -9,7 +9,7 @@
 import Foundation
 import EasyJSON
 
-class TestModel: EasyModel {
+public class TestModel: EasyModel {
     public var id: Int = -1
     public var firstName: String?
     public var lastName: String?
