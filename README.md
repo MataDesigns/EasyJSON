@@ -1,6 +1,6 @@
 # EasyJSON
 
-[![CI Status](http://img.shields.io/travis/Nicholas%20Mata/EasyJSON.svg?style=flat)](https://travis-ci.org/Nicholas%20Mata/EasyJSON)
+[![CI Status](http://img.shields.io/travis/MataDesigns/EasyJSON.svg?style=flat)](https://travis-ci.org/MataDesigns/EasyJSON)
 [![Version](https://img.shields.io/cocoapods/v/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 [![License](https://img.shields.io/cocoapods/l/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
 [![Platform](https://img.shields.io/cocoapods/p/EasyJSON.svg?style=flat)](http://cocoapods.org/pods/EasyJSON)
@@ -36,7 +36,7 @@ pod "EasyJSON"
 ## Features
 
 - [x] Allow custom mapping to and from JSON
-- [x] Map properties that are also subclasses of JSONModel
+- [x] Map properties that are also subclasses of EasyModel
 
 ## Usage
 
@@ -44,7 +44,7 @@ pod "EasyJSON"
 
 #### Creating Model
 
-Just create a class whos subclass is a JSONModel.
+Just create a class whos subclass is a EasyModel.
 
 **IMPORTANT** Properties that are type **Int** need a default value.
 
@@ -77,7 +77,7 @@ import EasyJSON
 
 let json = ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 let person = Person()
-person.fill(withJson: json)
+person.fill(withDict: json)
 
 print(person.id)        // Prints 1
 print(person.firstName) // Prints Jane
@@ -121,7 +121,7 @@ Then you can now use the following json to fill then object.
 let json = ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
 
 let person = Person()
-person.fill(withJson: json)
+person.fill(withDict: json)
 
 print(person.id)        // Prints 1
 print(person.firstName) // Prints Jane

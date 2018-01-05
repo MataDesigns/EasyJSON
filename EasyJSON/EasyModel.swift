@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import UIKit
 
-open class EasyModel: NSObject {
+@objcMembers open class EasyModel: NSObject {
     
     //MARK: - Variables
     
@@ -293,6 +292,18 @@ open class EasyModel: NSObject {
         }
         
         return results
+    }
+    
+    func fillV2(withDict dict: [String:Any]){
+        
+        let obj = Mirror(reflecting: self)
+        for var child in obj.children
+        {
+            if let name = child.label {
+//                child.value = dict[name]
+            }
+        }
+//        return obj.
     }
 }
 
