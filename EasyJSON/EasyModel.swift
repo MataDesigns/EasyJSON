@@ -293,18 +293,6 @@ import Foundation
         
         return results
     }
-    
-    func fillV2(withDict dict: [String:Any]){
-        
-        let obj = Mirror(reflecting: self)
-        for var child in obj.children
-        {
-            if let name = child.label {
-//                child.value = dict[name]
-            }
-        }
-//        return obj.
-    }
 }
 
 extension Date {
