@@ -109,9 +109,8 @@ class Person: EasyModel {
     var firstName: String?
     var lastName: String?
     
-    required init() {
-        super.init()
-        mapFromJson = ["PersonID", "id"]
+    override var mapFromJson: [String : String] {
+        return ["PersonID": "id"]
     }
 }
 ```
@@ -140,9 +139,8 @@ class Person: EasyModel {
     var firstName: String?
     var lastName: String?
     
-    required init() {
-        super.init()
-        mapToJson = ["id", "PersonID"]
+    override var mapToJson: [String : String] {
+        return ["id": "PersonID"]
     }
 }
 ```
@@ -199,9 +197,8 @@ class Classroom: EasyModel {
     // Properties
     
     // This is where the magic happens!
-    required init() {
-        super.init()
-        subObjects = ["students", Student.self]
+    override var subObjects: [String : AnyClass] {
+        return ["students": Student.self]
     }
 }
 ```
