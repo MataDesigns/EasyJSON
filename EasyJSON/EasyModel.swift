@@ -176,8 +176,14 @@ import Foundation
                     setValue(value as! Int, forKey: name)
                 case is Date:
                     setValue(value as! Date, forKey: name)
+                case is [[String: Any]]:
+                    if mirror.displayStyle != .optional {
+                        print("⚠️ EasyJSON WARNING: Property named \"\(name)\" was not set because not declared as subObject.\n    This can result in unwanted behavior! \n    TO REMOVE THIS WARNING: make property named \"\(name)\" optional in class \"\(Mirror(reflecting: self).subjectType)\".")
+                    }
                 case is [String: Any]:
-                    print("WARNING EasyModel !!! Property named \"\(name)\" needs definition in subObjects.")
+                    if mirror.displayStyle != .optional {
+                        print("⚠️ EasyJSON WARNING: Property named \"\(name)\" was not set because not declared as subObject.\n    This can result in unwanted behavior! \n    TO REMOVE THIS WARNING: make property named \"\(name)\" optional in class \"\(Mirror(reflecting: self).subjectType)\".")
+                    }
                 case nil:
                     if mirror.displayStyle == .optional {
                         setValue(nil, forKey: name)

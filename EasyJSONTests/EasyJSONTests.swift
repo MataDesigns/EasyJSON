@@ -21,8 +21,9 @@ class EasyJSONTests: XCTestCase {
         super.tearDown()
     }
     
-    /** Dictionary Tests **/
-    
+}
+/** Dictionary Tests **/
+extension EasyJSONTests {
     func testDictToModelFull() {
         let jsonDict: [String : Any] = ["id" : 1, "firstName": "Nicholas", "lastName": "Mata"]
         let model = TestModel()
@@ -56,8 +57,11 @@ class EasyJSONTests: XCTestCase {
         assert(model.lastName == nil)
     }
     
+}
+
+/** String Tests **/
+extension EasyJSONTests {
     
-    /** String Tests **/
     
     func testStringToModelFull() {
         let id = 1
@@ -98,6 +102,26 @@ class EasyJSONTests: XCTestCase {
         assert(model.firstName == nil)
         assert(model.lastName == nil)
     }
-    
-    
+}
+
+/** Subobjects Tests **/
+extension EasyJSONTests {
+    func testSubobjectArray() {
+        let jsonDict: [String : Any] = ["id" : 1,
+                                        "firstName": "Nicholas",
+                                        "lastName": "Mata",
+                                        "addresses": [
+                                            ["id": 1, "street": "123 Melrose Drive", "city": "Vista", "State" : "CA"],
+                                            ["id": 2, "street": "123 Western Drive", "city": "Santa Cruz", "State" : "CA"]
+                                        ]
+                                       ]
+        let model = TestModelSubobject()
+//        self.measure {
+            model.fill(withDict: jsonDict)
+//        }
+        assert(model.id == jsonDict["id"] as! Int)
+        assert(model.firstName == (jsonDict["firstName"] as! String))
+        assert(model.lastName == (jsonDict["lastName"] as! String))
+        assert(model.addresses.first?.id == ((jsonDict["addresses"] as! [[String: Any]])[0]["id"] as! Int), "Subobject Addresses was not filled.")
+    }
 }
