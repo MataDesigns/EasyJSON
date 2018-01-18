@@ -31,7 +31,7 @@ import Foundation
      If json is snake_cased and property names are camelCased then enable this so
      you DONT have to write a mapFromJson and mapToJson.
     */
-    open var snakeCase: Bool {
+    open var snakeCased: Bool {
         return false
     }
     
@@ -163,7 +163,7 @@ import Foundation
     public func fill(withDict jsonDict: [String: Any]) {
         for (name, mirror) in propertyMirrors() {
             
-            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : (snakeCase ? name.camelCaseToSnakeCase : name)
+            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : (snakeCased ? name.camelCaseToSnakeCase : name)
             
             if let value = jsonDict[jsonKey] {
                 if let subObjectType = subObjects[name] {
@@ -220,7 +220,7 @@ import Foundation
                 continue
             }
             
-            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : (snakeCase ? key.camelCaseToSnakeCase : key)
+            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : (snakeCased ? key.camelCaseToSnakeCase : key)
             
             let propertyValue = self.value(forKey: key) as Any?
             
