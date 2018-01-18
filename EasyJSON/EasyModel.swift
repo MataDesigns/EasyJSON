@@ -26,6 +26,15 @@ import Foundation
         return false
     }
     
+    
+    /**
+     If json is snake_cased and property names are camelCased then enable this so
+     you DONT have to write a mapFromJson and mapToJson.
+    */
+    open var snakeCase: Bool {
+        return false
+    }
+    
     /**
      Provides a way to map json keys that are different from the property name.
      
@@ -153,7 +162,8 @@ import Foundation
      */
     public func fill(withDict jsonDict: [String: Any]) {
         for (name, mirror) in propertyMirrors() {
-            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : name
+            
+            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : (snakeCase ? name.camelCaseToSnakeCase : name)
             
             if let value = jsonDict[jsonKey] {
                 if let subObjectType = subObjects[name] {
@@ -210,7 +220,7 @@ import Foundation
                 continue
             }
             
-            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : key
+            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : (snakeCase ? key.camelCaseToSnakeCase : key)
             
             let propertyValue = self.value(forKey: key) as Any?
             
@@ -298,6 +308,26 @@ import Foundation
         }
         
         return results
+    }
+}
+
+extension String {
+    internal var snakeCaseToCamelCase: String {
+        let items = self.components(separatedBy: "_")
+        var camelCase = ""
+        
+        items.enumerated().forEach { (arg) in
+            let (index, value) = arg
+            camelCase += 0 == index ? value : value.capitalized
+        }
+        return camelCase
+    }
+    
+    internal var camelCaseToSnakeCase: String {
+        let stringCharacters = String(self).map{ String($0) }
+        let snakeCaseString = stringCharacters.map{ $0.lowercased() != $0 ? "_" + $0.lowercased() : $0 }.joined()
+        
+        return snakeCaseString
     }
 }
 

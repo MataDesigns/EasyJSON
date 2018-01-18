@@ -13,6 +13,7 @@
 		A16C9BB31F01EF60003CA8A6 /* EasyJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */; };
 		A16C9BB51F01EF60003CA8A6 /* EasyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A16C9BA71F01EF60003CA8A6 /* EasyJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A198506D200175A9002D91AB /* TestModelSubobject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198506C200175A9002D91AB /* TestModelSubobject.swift */; };
+		A1F97BE220112EBE00D9E6AE /* TestModelSnakeCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F97BE120112EBE00D9E6AE /* TestModelSnakeCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyJSONTests.swift; sourceTree = "<group>"; };
 		A16C9BB41F01EF60003CA8A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A198506C200175A9002D91AB /* TestModelSubobject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelSubobject.swift; sourceTree = "<group>"; };
+		A1F97BE120112EBE00D9E6AE /* TestModelSnakeCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelSnakeCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				A16C9BB41F01EF60003CA8A6 /* Info.plist */,
 				A128A0011F01F0B700167ACE /* TestModel.swift */,
 				A198506C200175A9002D91AB /* TestModelSubobject.swift */,
+				A1F97BE120112EBE00D9E6AE /* TestModelSnakeCase.swift */,
 			);
 			path = EasyJSONTests;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			files = (
 				A16C9BB31F01EF60003CA8A6 /* EasyJSONTests.swift in Sources */,
 				A198506D200175A9002D91AB /* TestModelSubobject.swift in Sources */,
+				A1F97BE220112EBE00D9E6AE /* TestModelSnakeCase.swift in Sources */,
 				A128A0021F01F0B700167ACE /* TestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
