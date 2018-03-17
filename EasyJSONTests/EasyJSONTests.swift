@@ -168,3 +168,34 @@ extension EasyJSONTests {
     }
 }
 
+/** Subclass Tests **/
+extension EasyJSONTests {
+    func testFromSubclass() {
+        let jsonDict: [String : Any] = ["id" : 1,
+                                        "firstName": "Nicholas",
+                                        "lastName": "Mata"]
+        let model = TestSubclass()
+        measure {
+            model.fill(withDict: jsonDict)
+        }
+        assert(model.id == jsonDict["id"] as! Int)
+        assert(model.firstName == (jsonDict["firstName"] as! String))
+        assert(model.lastName == (jsonDict["lastName"] as! String))
+    }
+    
+    func testToSubclass() {
+        let jsonDict: [String : Any] = ["id" : 1,
+                                        "firstName": "Nicholas",
+                                        "lastName": "Mata"]
+        let model = TestSubclass()
+        measure {
+            model.fill(withDict: jsonDict)
+        }
+        let modelJson = model.toJson()
+        assert(modelJson["id"] as! Int == jsonDict["id"] as! Int)
+        assert(modelJson["firstName"] as! String == (jsonDict["firstName"] as! String))
+        assert(modelJson["lastName"] as! String == (jsonDict["lastName"] as! String))
+    }
+}
+
+

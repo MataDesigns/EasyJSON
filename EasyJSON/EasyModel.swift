@@ -129,7 +129,7 @@ import Foundation
         return []
     }
     
-    private var defaultExcludes: [String] = ["jsonTimeFormat", "exclude", "mapToJson", "mapFromJson", "subObjects"]
+    private var defaultExcludes: [String] = ["jsonTimeFormat", "exclude", "mapToJson", "mapFromJson", "subObjects", "defaultExcludes"]
     
     private var allExcludes: [String] {
         return defaultExcludes + exclude
@@ -248,7 +248,7 @@ import Foundation
     private func handleSubObject(_ attribute: Any, _ property: String, type: AnyClass)  {
         
         guard type is EasyModel.Type else {
-            print("WARNING EasyModel !!!: Sub-Object must be of type EasyModel.")
+            print("⚠️ EasyJSON WARNING: Sub-Object must be of type EasyModel.")
             return
         }
         
@@ -289,6 +289,27 @@ import Foundation
     }
     
     /**
+     Parse mirror matching mirror to property name
+     (Parsing superclass as well.)
+    
+     - Parameter mirror: mirror which went want to get all the properties.
+     - Returns: An array of tuples that is the property name and the property mirror.
+     */
+    private func mirrorTo(_ mirror: Mirror) -> [(String, Mirror)] {
+        var results: [(String, Mirror)] = []
+        for child in mirror.children
+        {
+            if let name = child.label{
+                results.append((name, Mirror(reflecting: child.value)))
+            }
+        }
+        if let parent = mirror.superclassMirror {
+            results.append(contentsOf: mirrorTo(parent))
+        }
+        return results
+    }
+    
+    /**
      Gets the property name and mirror found in this object.
      This is a helper method used to get information about the properties
      of the object.
@@ -299,13 +320,8 @@ import Foundation
      */
     private func propertyMirrors() -> [(String, Mirror)] {
         var results: [(String, Mirror)] = []
-        
-        for child in Mirror(reflecting: self).children
-        {
-            if let name = child.label{
-                results.append((name, Mirror(reflecting: child.value)))
-            }
-        }
+        let mirror = Mirror(reflecting: self)
+        results.append(contentsOf: mirrorTo(mirror))
         
         return results
     }
