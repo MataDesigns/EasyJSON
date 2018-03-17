@@ -26,6 +26,15 @@ import Foundation
         return false
     }
     
+    
+    /**
+     If json is snake_cased and property names are camelCased then enable this so
+     you DONT have to write a mapFromJson and mapToJson.
+    */
+    open var snakeCased: Bool {
+        return false
+    }
+    
     /**
      Provides a way to map json keys that are different from the property name.
      
@@ -120,7 +129,7 @@ import Foundation
         return []
     }
     
-    private var defaultExcludes: [String] = ["jsonTimeFormat", "exclude", "mapToJson", "mapFromJson", "subObjects"]
+    private var defaultExcludes: [String] = ["jsonTimeFormat", "exclude", "mapToJson", "mapFromJson", "subObjects", "defaultExcludes"]
     
     private var allExcludes: [String] {
         return defaultExcludes + exclude
@@ -153,7 +162,8 @@ import Foundation
      */
     public func fill(withDict jsonDict: [String: Any]) {
         for (name, mirror) in propertyMirrors() {
-            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : name
+            
+            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : (snakeCased ? name.camelCaseToSnakeCase : name)
             
             if let value = jsonDict[jsonKey] {
                 if let subObjectType = subObjects[name] {
@@ -176,8 +186,14 @@ import Foundation
                     setValue(value as! Int, forKey: name)
                 case is Date:
                     setValue(value as! Date, forKey: name)
+                case is [[String: Any]]:
+                    if mirror.displayStyle != .optional {
+                        print("⚠️ EasyJSON WARNING: Property named \"\(name)\" was not set because not declared as subObject.\n    This can result in unwanted behavior! \n    TO REMOVE THIS WARNING: make property named \"\(name)\" optional in class \"\(Mirror(reflecting: self).subjectType)\".")
+                    }
                 case is [String: Any]:
-                    print("WARNING EasyModel !!! Property named \"\(name)\" needs definition in subObjects.")
+                    if mirror.displayStyle != .optional {
+                        print("⚠️ EasyJSON WARNING: Property named \"\(name)\" was not set because not declared as subObject.\n    This can result in unwanted behavior! \n    TO REMOVE THIS WARNING: make property named \"\(name)\" optional in class \"\(Mirror(reflecting: self).subjectType)\".")
+                    }
                 case nil:
                     if mirror.displayStyle == .optional {
                         setValue(nil, forKey: name)
@@ -204,7 +220,7 @@ import Foundation
                 continue
             }
             
-            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : key
+            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : (snakeCased ? key.camelCaseToSnakeCase : key)
             
             let propertyValue = self.value(forKey: key) as Any?
             
@@ -232,7 +248,7 @@ import Foundation
     private func handleSubObject(_ attribute: Any, _ property: String, type: AnyClass)  {
         
         guard type is EasyModel.Type else {
-            print("WARNING EasyModel !!!: Sub-Object must be of type EasyModel.")
+            print("⚠️ EasyJSON WARNING: Sub-Object must be of type EasyModel.")
             return
         }
         
@@ -273,6 +289,27 @@ import Foundation
     }
     
     /**
+     Parse mirror matching mirror to property name
+     (Parsing superclass as well.)
+    
+     - Parameter mirror: mirror which went want to get all the properties.
+     - Returns: An array of tuples that is the property name and the property mirror.
+     */
+    private func mirrorTo(_ mirror: Mirror) -> [(String, Mirror)] {
+        var results: [(String, Mirror)] = []
+        for child in mirror.children
+        {
+            if let name = child.label{
+                results.append((name, Mirror(reflecting: child.value)))
+            }
+        }
+        if let parent = mirror.superclassMirror {
+            results.append(contentsOf: mirrorTo(parent))
+        }
+        return results
+    }
+    
+    /**
      Gets the property name and mirror found in this object.
      This is a helper method used to get information about the properties
      of the object.
@@ -283,15 +320,30 @@ import Foundation
      */
     private func propertyMirrors() -> [(String, Mirror)] {
         var results: [(String, Mirror)] = []
-        
-        for child in Mirror(reflecting: self).children
-        {
-            if let name = child.label{
-                results.append((name, Mirror(reflecting: child.value)))
-            }
-        }
+        let mirror = Mirror(reflecting: self)
+        results.append(contentsOf: mirrorTo(mirror))
         
         return results
+    }
+}
+
+extension String {
+    internal var snakeCaseToCamelCase: String {
+        let items = self.components(separatedBy: "_")
+        var camelCase = ""
+        
+        items.enumerated().forEach { (arg) in
+            let (index, value) = arg
+            camelCase += 0 == index ? value : value.capitalized
+        }
+        return camelCase
+    }
+    
+    internal var camelCaseToSnakeCase: String {
+        let stringCharacters = String(self).map{ String($0) }
+        let snakeCaseString = stringCharacters.map{ $0.lowercased() != $0 ? "_" + $0.lowercased() : $0 }.joined()
+        
+        return snakeCaseString
     }
 }
 
