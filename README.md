@@ -44,7 +44,7 @@ github "MataDesigns/EasyJSON"
 
 - ✅ Allow custom mapping to and from JSON
 - ✅ Map properties that are also subclasses of EasyModel
-- ✅ Allow custom handler for a specific property
+- ✅ Allow custom handler for a parsing a specific property
 - ✅ Map subobjects
 - ✅ snake_case🐍 and camelCase🐪 support
 
