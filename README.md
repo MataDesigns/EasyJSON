@@ -217,7 +217,7 @@ Now Classroom will also fill the students property when given JSON.
 
 ## Author
 
-Nicholas Mata, NicholasMata94@gmail.com
+Nicholas Mata, nicholas@matadesigns.net
 
 ## License
 
