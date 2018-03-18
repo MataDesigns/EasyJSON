@@ -15,23 +15,22 @@ import Foundation
     /**
      The format to parse date from string.
      */
-    open var timeFormat :String  {
+    open var _timeFormat_ :String  {
         return "yyyy-MM-dd'T'HH:mm:ss"
     }
     
     /**
      Whether dates are UTC
      */
-    open var isUTC: Bool {
+    open var _isUTC_: Bool {
         return false
     }
-    
     
     /**
      If json is snake_cased and property names are camelCased then enable this so
      you DONT have to write a mapFromJson and mapToJson.
     */
-    open var snakeCased: Bool {
+    open var _snakeCased_: Bool {
         return false
     }
     
@@ -60,7 +59,7 @@ import Foundation
      ["firstName": "Jane", "lastName": "Doe"]
      ```
      */
-    open var mapFromJson: [String: String] {
+    open var _mapFromJson_: [String: String] {
         return [:]
     }
     
@@ -90,7 +89,7 @@ import Foundation
      ["first": "Jane", "last": "Doe"]
      ```
      */
-    open var mapToJson: [String: String] {
+    open var _mapToJson_: [String: String] {
         return [:]
     }
     
@@ -118,21 +117,21 @@ import Foundation
      ```
      ["time": "2016-09-20T08:00:00", "person": ["firstName": "Jane", "lastName": "Doe"]]
      */
-    open var subObjects: [String: AnyClass] {
+    open var _subObjects_: [String: AnyClass] {
         return [:]
     }
     
     /**
      An array of property names which you would like to exclude when turning Model into JSON.
      */
-    open var exclude: [String] {
+    open var _exclude_: [String] {
         return []
     }
     
-    private var defaultExcludes: [String] = ["jsonTimeFormat", "exclude", "mapToJson", "mapFromJson", "subObjects", "defaultExcludes"]
+    private var _defaultExcludes_: [String] = ["_timeFormat_", "_isUTC_", "_exclude_", "_snakeCased_", "_mapFromJson_", "_mapToJson_", "_subObjects_", "_defaultExcludes_", "_allExcludes_"]
     
-    private var allExcludes: [String] {
-        return defaultExcludes + exclude
+    private var _allExcludes_: [String] {
+        return _defaultExcludes_ + _exclude_
     }
     
     required override public init() {
@@ -163,10 +162,10 @@ import Foundation
     public func fill(withDict jsonDict: [String: Any]) {
         for (name, mirror) in propertyMirrors() {
             
-            let jsonKey = mapFromJson[name] != nil ? mapFromJson[name]! : (snakeCased ? name.camelCaseToSnakeCase : name)
+            let jsonKey = _mapFromJson_[name] != nil ? _mapFromJson_[name]! : (_snakeCased_ ? name.camelCaseToSnakeCase : name)
             
             if let value = jsonDict[jsonKey] {
-                if let subObjectType = subObjects[name] {
+                if let subObjectType = _subObjects_[name] {
                     handleSubObject(value, name, type: subObjectType)
                     continue
                 }
@@ -216,11 +215,11 @@ import Foundation
         var json = [String: Any]()
         for (key, _) in propertyMirrors() {
             
-            if allExcludes.contains(key) {
+            if _allExcludes_.contains(key) {
                 continue
             }
             
-            let jsonKey = mapToJson[key] != nil ? mapToJson[key]! : (snakeCased ? key.camelCaseToSnakeCase : key)
+            let jsonKey = _mapToJson_[key] != nil ? _mapToJson_[key]! : (_snakeCased_ ? key.camelCaseToSnakeCase : key)
             
             let propertyValue = self.value(forKey: key) as Any?
             
@@ -278,9 +277,9 @@ import Foundation
      */
     private func handleString(_ string: String,_ property: String, _ mirror: Mirror) {
         if mirror.subjectType == Date!.self || mirror.subjectType == Date?.self {
-            if let date = Date.from(string, format: timeFormat, timeZone: isUTC ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
+            if let date = Date.from(string, format: _timeFormat_, timeZone: _isUTC_ ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
                 self.setValue(date, forKey: property)
-            }else if let date = Date.from(string, format: "HH:mm:ss", timeZone: isUTC ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
+            }else if let date = Date.from(string, format: "HH:mm:ss", timeZone: _isUTC_ ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
                 self.setValue(date, forKey: property)
             }
         } else {

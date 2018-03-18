@@ -15,7 +15,7 @@ public class TestModelSubobject: EasyModel {
     public var lastName: String?
     public var addresses = [AddressModel]()
     
-    public override var subObjects: [String : AnyClass] {
+    public override var _subObjects_: [String : AnyClass] {
         return ["addresses": AddressModel.self]
     }
 }

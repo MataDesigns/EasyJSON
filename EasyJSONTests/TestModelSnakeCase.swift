@@ -10,7 +10,7 @@ import UIKit
 import EasyJSON
 
 class TestModelSnakeCase: EasyModel {
-    override var snakeCased: Bool {
+    override var _snakeCased_: Bool {
         return true
     }
     
@@ -20,7 +20,7 @@ class TestModelSnakeCase: EasyModel {
     public var addresses = [AddressModel]()
     
     
-    public override var subObjects: [String : AnyClass] {
+    public override var _subObjects_: [String : AnyClass] {
         return ["addresses": AddressModel.self]
     }
 }
