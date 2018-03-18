@@ -119,7 +119,7 @@ class Person: EasyModel {
     var firstName: String?
     var lastName: String?
     
-    override var mapFromJson: [String : String] {
+    override var _mapFromJson_: [String : String] {
         return ["PersonID": "id"]
     }
 }
@@ -149,7 +149,7 @@ class Person: EasyModel {
     var firstName: String?
     var lastName: String?
     
-    override var mapToJson: [String : String] {
+    override var _mapToJson_: [String : String] {
         return ["id": "PersonID"]
     }
 }
@@ -207,7 +207,7 @@ class Classroom: EasyModel {
     // Properties
     
     // This is where the magic happens!
-    override var subObjects: [String : AnyClass] {
+    override var _subObjects_: [String : AnyClass] {
         return ["students": Student.self]
     }
 }
