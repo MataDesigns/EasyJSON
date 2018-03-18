@@ -26,6 +26,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
+### Cocoapods
 EasyJSON is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
@@ -33,10 +34,19 @@ it, simply add the following line to your Podfile:
 pod "EasyJSON"
 ```
 
+### Carthage
+ To install it, simple add the following line to your Cartfile
+```ruby
+github "MataDesigns/EasyJSON"
+```
+
 ## Features
 
-- [x] Allow custom mapping to and from JSON
-- [x] Map properties that are also subclasses of EasyModel
+- ✅ Allow custom mapping to and from JSON
+- ✅ Map properties that are also subclasses of EasyModel
+- ✅ Allow custom handler for a specific property
+- ✅ Map subobjects
+- ✅ snake_case🐍 and camelCase🐪 support
 
 ## Usage
 
@@ -46,7 +56,7 @@ pod "EasyJSON"
 
 Just create a class whos subclass is a EasyModel.
 
-**IMPORTANT** Properties that are type **Int** need a default value.
+**<span style="color:orange;">IMPORTANT</span>** Properties that are type **Int** need a default value or user **NSNumber** instead.
 
 ```swift
 import EasyJSON
