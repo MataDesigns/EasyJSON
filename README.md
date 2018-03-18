@@ -44,7 +44,7 @@ github "MataDesigns/EasyJSON"
 
 - ✅ Allow custom mapping to and from JSON
 - ✅ Map properties that are also subclasses of EasyModel
-- ✅ Allow custom handler for a specific property
+- ✅ Allow custom handler for a parsing a specific property
 - ✅ Map subobjects
 - ✅ snake_case🐍 and camelCase🐪 support
 
@@ -217,7 +217,7 @@ Now Classroom will also fill the students property when given JSON.
 
 ## Author
 
-Nicholas Mata, NicholasMata94@gmail.com
+Nicholas Mata, nicholas@matadesigns.net
 
 ## License
 
