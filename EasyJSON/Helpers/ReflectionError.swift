@@ -1,3 +1,11 @@
+//
+//  ReflectionError.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 public enum ReflectionError : Error, CustomStringConvertible, Equatable {
     case notStruct(type: Any.Type)
     case valueIsNotType(value: Any, type: Any.Type)

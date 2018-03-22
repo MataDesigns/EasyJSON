@@ -1,3 +1,11 @@
+//
+//  Array+Extensions.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 protocol UTF8Initializable {
     init?(validatingUTF8: UnsafePointer<CChar>)
 }

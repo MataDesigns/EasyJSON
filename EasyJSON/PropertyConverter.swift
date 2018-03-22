@@ -11,12 +11,15 @@ import UIKit
 public typealias ToModelConverter = (Any?) -> Any?
 public typealias ToJsonConverter = (Any?) -> Any?
 
+
+/// A protocol for encoding and decoding a specific key
 public protocol Converter {
     var key: String {get}
     var toModel: ToModelConverter {get}
     var toJson: ToJsonConverter {get}
 }
 
+// Encoding and decoding a specific property
 public class PropertyConverter: Converter {
     public var key: String
     public var toModel: ToModelConverter
@@ -29,6 +32,7 @@ public class PropertyConverter: Converter {
     }
 }
 
+/// A converter for relationship between a string and date
 public class DateConverter: Converter {
     public var key: String
     public var toModel: ToModelConverter
@@ -41,6 +45,8 @@ public class DateConverter: Converter {
     }
 }
 
+
+/// A converter for description the relationship between a string and bool
 public class BoolConverter: Converter {
     public var key: String
     public var toModel: ToModelConverter

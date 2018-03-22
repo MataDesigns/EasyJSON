@@ -8,11 +8,13 @@
 
 import UIKit
 
+/// A protocol using to map a two string
 public protocol KeyMap {
     var modelKey: String? {get set}
     var jsonKey: String? {get set}
 }
 
+/// A Map for a property and json key.
 public class PropertyMap: KeyMap {
     public var modelKey: String?
     public var jsonKey: String?
@@ -23,6 +25,8 @@ public class PropertyMap: KeyMap {
     }
 }
 
+
+/// A Map for hiding a property (empty map)
 public class HidePropertyMap: KeyMap {
     public var modelKey: String?
     public var jsonKey: String?

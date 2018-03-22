@@ -1,10 +1,11 @@
 //
 //  UnsafePointer+Extensions.swift
-//  Reflection
+//  EasyJSON
 //
-//  Created by Bradley Hilton on 10/29/16.
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
 //
-//
+
 
 extension UnsafePointer {
     

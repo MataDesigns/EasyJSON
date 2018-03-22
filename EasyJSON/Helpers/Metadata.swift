@@ -1,3 +1,11 @@
+//
+//  Metadata.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 struct Metadata : MetadataType {
     var pointer: UnsafePointer<Int>
 

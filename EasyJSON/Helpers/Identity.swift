@@ -1,3 +1,11 @@
+//
+//  Identity.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 /// Tests if `value` is `type` or a subclass of `type`
 public func value(_ value: Any, is type: Any.Type) -> Bool {
     return extensions(of: type).isValueTypeOrSubtype(value)

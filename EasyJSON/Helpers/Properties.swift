@@ -1,3 +1,11 @@
+//
+//  Properties.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 struct HashedType : Hashable {
     let hashValue: Int
     init(_ type: Any.Type) {

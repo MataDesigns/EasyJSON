@@ -8,12 +8,16 @@
 
 import Foundation
 
+
+/// A simple class implementing EasyJSON so that init isnt required.
 open class EasyModel: EasyJSON {
     open private(set) var _options_: EasyModelOptions = EasyModelOptions()
     
     public required init() {}
 }
 
+
+/// A protocol designed to Object map JSON. Can be used on class or struct.
 public protocol EasyJSON {
     init()
     var _options_: EasyModelOptions {get}

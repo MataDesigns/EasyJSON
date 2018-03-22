@@ -1,4 +1,12 @@
-// https://github.com/apple/swift/blob/master/lib/IRGen/ValueWitness.h
+//
+//  ValueWitnessTable.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
+
 struct ValueWitnessTable : PointerType {
     var pointer: UnsafePointer<_ValueWitnessTable>
 

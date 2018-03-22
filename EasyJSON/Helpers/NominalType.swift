@@ -1,3 +1,11 @@
+//
+//  NominalType.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 protocol NominalType : MetadataType {
     var nominalTypeDescriptorOffsetLocation: Int { get }
 }

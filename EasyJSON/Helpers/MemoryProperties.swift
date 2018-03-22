@@ -1,3 +1,11 @@
+//
+//  MetadataProperties.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 public func alignof(_ x: Any.Type) -> Int {
     return Metadata(type: x).valueWitnessTable.align
 }

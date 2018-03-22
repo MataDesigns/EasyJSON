@@ -1,4 +1,11 @@
-// https://github.com/apple/swift/blob/swift-3.0-branch/include/swift/ABI/MetadataKind.def
+//
+//  Metadata+Kind.swift
+//  EasyJSON
+//
+//  Created by Nicholas Mata on 3/18/18.
+//  Copyright © 2018 MataDesigns. All rights reserved.
+//
+
 extension Metadata {
     static let kind: Kind? = nil
 
