@@ -25,7 +25,7 @@ extension EasyJSON {
     /**
      Fills the object with the json provided.
      
-     - parameters:
+     - Parameters:
      - jsonString: JSON represented as a string.
      
      */
@@ -38,7 +38,7 @@ extension EasyJSON {
     /**
      Fills the object with the json provided.
      
-     - parameters:
+     - Parameters:
      - jsonDict: JSON represented as a dictionary.
      */
     public mutating func fill(withDict jsonDict: [String: Any?]) {
@@ -104,7 +104,7 @@ extension EasyJSON {
     /**
      Turns in object into JSON dictionary. [String: Any]
      
-     - returns: Dictionary representing the model in JSON.
+     - Returns: Dictionary representing the model in JSON.
      */
     public func toJson() -> [String: Any] {
         var json = [String: Any]()
@@ -149,6 +149,15 @@ extension EasyJSON {
         return json
     }
     
+    // MARK: - Private Functions
+    
+    /**
+     Get the value of the property using Reflection
+     
+     - Parameter
+     - key: The property key/name
+     - Returns: The value of the property
+     */
     private func getValue(for key:String) ->Any? {
         do {
             return try Reflection.get(key, from: self)
@@ -157,6 +166,13 @@ extension EasyJSON {
         }
     }
     
+    /**
+     Set the value of the property using Reflection
+     
+     - Parameters:
+     - value: The value to set the property too
+     - key: The property key/name
+     */
     private mutating func setValue(_ value: Any?, forKey key:String) {
         guard let value = value else {
             return
@@ -170,13 +186,12 @@ extension EasyJSON {
         return
     }
     
-    // MARK: - Private Functions
-    
     /**
      Parse mirror matching mirror to property name
      (Parsing superclass as well.)
      
-     - Parameter mirror: mirror which went want to get all the properties.
+     - Parameter
+     - mirror: mirror which went want to get all the properties.
      - Returns: An array of tuples that is the property name and the property mirror.
      */
     private func mirrorTo(_ mirror: Mirror) -> [(String, Mirror, Any)] {
@@ -198,9 +213,8 @@ extension EasyJSON {
      This is a helper method used to get information about the properties
      of the object.
      
-     - returns:
-     A dictionary where key is the property name and value is the mirror for the property.
-     
+     - Returns: A dictionary where key is the property name and value is
+     the mirror for the property.
      */
     private func propertyMirrors() -> [(String, Mirror, Any)] {
         var results: [(String, Mirror, Any)] = []
