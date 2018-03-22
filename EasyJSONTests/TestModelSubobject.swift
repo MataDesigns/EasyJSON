@@ -10,18 +10,15 @@ import UIKit
 import EasyJSON
 
 public class TestModelSubobject: EasyModel {
-    public var id: Int = -1
+    public var id: Int!
     public var firstName: String?
     public var lastName: String?
+    public var primaryAddress = AddressModel()
     public var addresses = [AddressModel]()
-    
-    public override var _subObjects_: [String : AnyClass] {
-        return ["addresses": AddressModel.self]
-    }
 }
 
 public class AddressModel: EasyModel {
-    public var id: Int = -1
+    public var id: Int!
     public var street: String?
     public var city: String?
     public var state: String?

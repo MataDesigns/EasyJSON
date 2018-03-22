@@ -10,7 +10,7 @@ import UIKit
 import EasyJSON
 
 class TestSuperclass: EasyModel {
-    var id: Int = -1
+    var id: Int!
 }
 
 class TestSubclass: TestSuperclass {

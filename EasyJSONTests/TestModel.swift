@@ -10,8 +10,7 @@ import Foundation
 import EasyJSON
 
 public class TestModel: EasyModel {
-    public var id: Int = -1
+    public var id: Int?
     public var firstName: String?
     public var lastName: String?
-    
 }

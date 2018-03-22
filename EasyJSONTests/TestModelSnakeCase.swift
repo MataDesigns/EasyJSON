@@ -10,17 +10,13 @@ import UIKit
 import EasyJSON
 
 class TestModelSnakeCase: EasyModel {
-    override var _snakeCased_: Bool {
-        return true
+    
+    override var _options_: EasyModelOptions {
+        return EasyModelOptions(snakeCased: true)
     }
     
-    public var id: Int = -1
+    public var id: Int!
     public var firstName: String?
     public var lastName: String?
     public var addresses = [AddressModel]()
-    
-    
-    public override var _subObjects_: [String : AnyClass] {
-        return ["addresses": AddressModel.self]
-    }
 }
