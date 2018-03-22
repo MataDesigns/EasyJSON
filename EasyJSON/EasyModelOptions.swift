@@ -10,13 +10,13 @@ import UIKit
 
 public struct EasyModelOptions {
     public var converters : [Converter]
-    public var mappers: [KeyMap]
+    public var maps: [KeyMap]
     public var snakeCased: Bool
     
-    public init(snakeCased: Bool = false, converters: [Converter]? = nil, mappers: [KeyMap]? = nil) {
+    public init(snakeCased: Bool = false, converters: [Converter]? = nil, maps: [KeyMap]? = nil) {
         self.snakeCased = snakeCased
         self.converters = converters ?? [Converter]()
-        self.mappers = mappers ?? [KeyMap]()
+        self.maps = maps ?? [KeyMap]()
     }
     
     public func converter(for key: String) -> Converter? {
@@ -25,9 +25,9 @@ public struct EasyModelOptions {
         })
     }
     
-    public func mapper(for modelKey: String) -> KeyMap? {
-        return mappers.first(where: { (mappers) -> Bool in
-            return mappers.modelKey == modelKey
+    public func map(for modelKey: String) -> KeyMap? {
+        return maps.first(where: { (map) -> Bool in
+            return map.modelKey == modelKey
         })
     }
 }

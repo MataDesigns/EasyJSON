@@ -15,10 +15,12 @@ class TestModelWithOptions: EasyModel {
     override var _options_: EasyModelOptions {
         let timeConverter = DateConverter(key: "time", format: "HH:mm")
         let isGuestConverter = BoolConverter(key: "isValid", trueWhen: "Yes", whenFalse: "No")
-        let converters: [Converter] = [timeConverter, isGuestConverter]
+        
         let hideSnake = HidePropertyMap(modelKey: "snakeCased")
-        let mappers: [KeyMap] = [hideSnake]
-        return EasyModelOptions(snakeCased: snakeCased, converters: converters, mappers: mappers)
+        
+        let converters: [Converter] = [timeConverter, isGuestConverter]
+        let maps: [KeyMap] = [hideSnake]
+        return EasyModelOptions(snakeCased: snakeCased, converters: converters, maps: maps)
     }
     
     public var id: Int!

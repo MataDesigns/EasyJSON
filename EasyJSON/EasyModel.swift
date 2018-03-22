@@ -46,7 +46,7 @@ extension EasyJSON {
             
             var jsonKey = _options_.snakeCased ? name.camelCaseToSnakeCase : name
             
-            if let map = _options_.mapper(for: name) {
+            if let map = _options_.map(for: name) {
                 if let mapKey = map.jsonKey {
                     jsonKey = mapKey
                 } else {
@@ -116,7 +116,7 @@ extension EasyJSON {
             
             var jsonKey = _options_.snakeCased ? key.camelCaseToSnakeCase : key
             
-            if let map = _options_.mapper(for: key) {
+            if let map = _options_.map(for: key) {
                 if let mapKey = map.jsonKey {
                     jsonKey = mapKey
                 } else {
