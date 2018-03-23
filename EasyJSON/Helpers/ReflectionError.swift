@@ -14,7 +14,7 @@ public enum ReflectionError : Error, CustomStringConvertible, Equatable {
     case unexpected
 
     public var description: String {
-        return "Reflection Error: \(caseDescription)"
+        return "\(caseDescription)"
     }
 
     var caseDescription: String {
