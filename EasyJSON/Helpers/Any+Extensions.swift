@@ -41,22 +41,41 @@ extension AnyExtensions {
         return Reflection.storage(instance: &self)
     }
     
+    static func of(type: Any.Type) -> AnyExtensions.Type {
+        var extensions: AnyExtensions.Type = Extensions.self
+        withUnsafePointer(to: &extensions) { pointer in
+            UnsafeMutableRawPointer(mutating: pointer).assumingMemoryBound(to: Any.Type.self).pointee = type
+        }
+        return extensions
+    }
+    
+    static func of(value: Any) -> AnyExtensions {
+        var extensions: AnyExtensions = Extensions()
+        withUnsafePointer(to: &extensions) { pointer in
+            UnsafeMutableRawPointer(mutating: pointer).assumingMemoryBound(to: Any.self).pointee = value
+        }
+        return extensions
+    }
+    
 }
 
-func extensions(of type: Any.Type) -> AnyExtensions.Type {
-    struct Extensions : AnyExtensions {}
-    var extensions: AnyExtensions.Type = Extensions.self
-    withUnsafePointer(to: &extensions) { pointer in
-        UnsafeMutableRawPointer(mutating: pointer).assumingMemoryBound(to: Any.Type.self).pointee = type
-    }
-    return extensions
-}
+struct Extensions : AnyExtensions {}
 
-func extensions(of value: Any) -> AnyExtensions {
-    struct Extensions : AnyExtensions {}
-    var extensions: AnyExtensions = Extensions()
-    withUnsafePointer(to: &extensions) { pointer in
-        UnsafeMutableRawPointer(mutating: pointer).assumingMemoryBound(to: Any.self).pointee = value
-    }
-    return extensions
-}
+//func extensions(of type: Any.Type) -> AnyExtensions.Type {
+//    struct Extensions : AnyExtensions {}
+//    var extensions: AnyExtensions.Type = Extensions.self
+//    withUnsafePointer(to: &extensions) { pointer in
+//        UnsafeMutableRawPointer(mutating: pointer).assumingMemoryBound(to: Any.Type.self).pointee = type
+//    }
+//    return extensions
+//}
+
+//func extensions(of value: Any) -> AnyExtensions {
+//    struct Extensions : AnyExtensions {}
+//    var extensions: AnyExtensions = Extensions()
+//    withUnsafePointer(to: &extensions) { pointer in
+//        UnsafeMutableRawPointer(mutating: pointer).assumingMemoryBound(to: Any.self).pointee = value
+//    }
+//    return extensions
+//}
+

@@ -10,7 +10,6 @@ import Foundation
 
 enum EasyModelError: Error, CustomStringConvertible {
     
-    
     case invalidType(propertyName: String, extra: String)
     case nonOptional(propertyName: String, type: Any.Type)
     case missingRequired(propertyName: String, type: Any.Type)
@@ -67,6 +66,8 @@ extension EasyJSON {
      */
     public mutating func fill(withDict jsonDict: [String: Any?]) throws {
         for (name, mirror, mirrorValue) in propertyMirrors() {
+            // The properties type
+            let propertyType = mirror.subjectType
             // Get jsonKey aka property name unless snakeCased option is enabled
             var jsonKey = _options_.snakeCased ? name.camelCaseToSnakeCase : name
             // Check if property has a custom map
@@ -81,19 +82,19 @@ extension EasyJSON {
             // Get value from json dict for key (aka property name or from a map)
             guard let value = jsonDict[jsonKey] else {
                 // Json Dict doesnt contain key (Check if property is required aka non-optional)
-                if getValue(for: name) == nil && !isOptional(type: mirror.subjectType) {
-                    throw EasyModelError.missingRequired(propertyName: name, type: mirror.subjectType)
+                if getValue(for: name) == nil && !isOptional(type: propertyType) {
+                    throw EasyModelError.missingRequired(propertyName: name, type: propertyType)
                 }
                 continue
             }
             
             // Check if jsonDict is nil that the property is Optional (aka can be nil).
-            if value == nil && !isOptional(type: mirror.subjectType) {
-                throw EasyModelError.nonOptional(propertyName: name, type: mirror.subjectType)
+            if value == nil && !isOptional(type: propertyType) {
+                throw EasyModelError.nonOptional(propertyName: name, type: propertyType)
             }
             
-            // Check if property has a converter
-            if let converter = _options_.converter(for: name) {
+            // Get converter either for property name or for type.
+            if let converter = getConverter(propertyName: name, propertyType: propertyType) {
                 // Get value from converter
                 let convertValue = converter.toModel(value)
                 try setValue(convertValue, forKey: name)
@@ -103,10 +104,8 @@ extension EasyJSON {
             switch value {
             // If value is array of json objects.
             case let jsonArray as [[String: Any]]:
-                guard let objectType = getBaseType(mainType: mirror.subjectType) as? EasyJSON.Type else {
-                    // TODO: This is a error
-                    print("Base Type not Class/EasyModel")
-                    continue
+                guard let objectType = getClass(mainType: propertyType) as? EasyJSON.Type else {
+                    throw EasyModelError.invalidType(propertyName: name, extra: "\(String(reflecting: propertyType)) is not an Array<EasyJSON>")
                 }
                 // If array is initialized in code use that value else create new array.
                 var modelObjects = mirrorValue as? [EasyJSON] ?? [EasyJSON]()
@@ -119,10 +118,8 @@ extension EasyJSON {
                 try setValue(modelObjects, forKey: name)
             // If value is json object.
             case let jsonObject as [String: Any]:
-                guard let easyModelType = getBaseType(mainType: mirror.subjectType) as? EasyJSON.Type else {
-                    // TODO: this is a error
-                    print("Base Type not Class/EasyModel")
-                    continue
+                guard let easyModelType = getClass(mainType: propertyType) as? EasyJSON.Type else {
+                    throw EasyModelError.invalidType(propertyName: name, extra: "\(String(reflecting: propertyType)) is not a subclass of EasyJSON")
                 }
                 var easyModel = mirrorValue as? EasyJSON ?? easyModelType.init()
                 try easyModel.fill(withDict: jsonObject)
@@ -130,7 +127,6 @@ extension EasyJSON {
             default:
                 try setValue(value, forKey: name)
             }
-            
         }
     }
     
@@ -139,9 +135,9 @@ extension EasyJSON {
      
      - Returns: Dictionary representing the model in JSON.
      */
-    public func toJson() -> [String: Any] {
+    public func toJson() -> [String: Any?] {
         var json = [String: Any]()
-        for (key, _, _) in propertyMirrors() {
+        for (key, mirror, _) in propertyMirrors() {
             
             if key == "_options_" {
                 continue
@@ -159,18 +155,19 @@ extension EasyJSON {
             
             let propertyValue = getValue(for: key)
             
-            if let converter = _options_.converter(for: key) {
+            // Get converter either for property name or for type.
+            if let converter = getConverter(propertyName: key, propertyType: mirror.subjectType) {
+                // Get value from converter
                 let convertValue = converter.toJson(propertyValue)
                 json[jsonKey] = convertValue
                 continue
             }
             
-            
             switch propertyValue {
             case let jsonModel as EasyModel:
                 json[jsonKey] = jsonModel.toJson()
             case let jsonModels as [EasyModel]:
-                var models = [[String: Any]]()
+                var models = [[String: Any?]]()
                 for jsonModel in jsonModels {
                     models.append(jsonModel.toJson())
                 }
@@ -184,13 +181,44 @@ extension EasyJSON {
     
     // MARK: - Private Functions
     
-    private func getBaseType(mainType: Any.Type) -> AnyClass? {
+    
+    /// Get converter from name/key or type
+    ///
+    /// - Parameters:
+    ///   - propertyName: The property name/key
+    ///   - propertyType: The property type
+    /// - Returns: The converter if one exists.
+    func getConverter(propertyName: String, propertyType: Any.Type) -> Converter? {
+        // Check if property has a key converter
+        if let converter = _options_.converter(for: .key(propertyName)) {
+            return converter
+        }
+        // Check if property has a type converter
+        if let converter = _options_.converter(for: .type(propertyType)) {
+            return converter
+        }
+        // No converter for name or type
+        return nil
+    }
+    
+    /// Gets the class from the given type.
+    /// If given Optional or Implicit will unwrap.
+    /// If given a Array will get class from Array object.
+    ///
+    /// - Parameter mainType: The type to check if class exists.
+    /// - Returns: The class that was unwrapped from the type.
+    private func getClass(mainType: Any.Type) -> AnyClass? {
         let typeString = String(reflecting: mainType)
         let typeComponents = typeString.components(separatedBy: "<")
         let baseType = typeComponents[typeComponents.count-1].replacingOccurrences(of: ">", with: "")
         return NSClassFromString(baseType)
     }
     
+    
+    /// Determines if a Type is Optional or not using string reflection of type.
+    ///
+    /// - Parameter type: The Type which you would like to determine if is optional
+    /// - Returns: A boolean value indicating whether the type is optional.
     private func isOptional(type: Any.Type) -> Bool {
         let typeString = String(reflecting: type)
         if typeString.contains("ImplicitlyUnwrapped") {

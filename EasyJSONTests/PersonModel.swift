@@ -9,7 +9,7 @@
 import UIKit
 import EasyJSON
 
-let myAddressDict: [String: Any?] = [
+let myAddress: [String: Any?] = [
     "id": 1,
     "streetAddress": "123 1st Street",
     "extendedAddress": nil,
@@ -18,13 +18,14 @@ let myAddressDict: [String: Any?] = [
     "zipcode": "92093"
 ]
 
-let myDict: [String: Any?] = [
+let me: [String: Any?] = [
     "id": 1,
     "firstName": "Nicholas",
     "middleName": nil,
     "lastName": "Mata",
     "facebookId": nil,
-    "address": myAddressDict,
+    "birthday": "02/18/94",
+    "address": myAddress,
     "friends": [friendOne, friendTwo]
 ]
 
@@ -74,8 +75,16 @@ class UserModel: EasyModel {
 }
 
 class PersonModel: UserModel {
+    
+    override var _options_: EasyModelOptions {
+        var converters = [ConverterKey: Converter]()
+        converters[.type(Date.self)] = DateConverter(format: "MM/dd/yy")
+        return EasyModelOptions(converters:converters)
+    }
+    
     var facebookId: Int?
     var address: AddressModel!
+    var birthday: Date?
     var friends = [PersonModel]()
 }
 

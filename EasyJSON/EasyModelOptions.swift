@@ -13,15 +13,15 @@ import UIKit
 public struct EasyModelOptions {
     
     /// An array of converters used with object mapping EasyModel
-    public var converters : [Converter]
+    public var converters : [ConverterKey: Converter]
     /// An array of maps used with object mapping EasyModel
     public var maps: [KeyMap]
     /// Whether or not the json is snake_cased
     public var snakeCased: Bool
     
-    public init(snakeCased: Bool = false, converters: [Converter]? = nil, maps: [KeyMap]? = nil) {
+    public init(snakeCased: Bool = false, converters: [ConverterKey:Converter]? = nil, maps: [KeyMap]? = nil) {
         self.snakeCased = snakeCased
-        self.converters = converters ?? [Converter]()
+        self.converters = converters ?? [ConverterKey:Converter]()
         self.maps = maps ?? [KeyMap]()
     }
     
@@ -30,11 +30,11 @@ public struct EasyModelOptions {
     ///
     /// - Parameter key: The property the converter is for.
     /// - Returns: The converter for the given property.
-    public func converter(for key: String) -> Converter? {
-        return converters.first(where: { (converter) -> Bool in
-            return converter.key == key
-        })
-    }
+    public func converter(for key: ConverterKey) -> Converter? {
+        guard let converter = converters[key] else {
+            return nil
+        }
+        return converter    }
     
     
     /// Get the map for a specific property (key) if exists

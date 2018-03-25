@@ -11,29 +11,28 @@
 		A16C9BAE1F01EF60003CA8A6 /* EasyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C9BA41F01EF60003CA8A6 /* EasyJSON.framework */; };
 		A16C9BB31F01EF60003CA8A6 /* EasyJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */; };
 		A16C9BB51F01EF60003CA8A6 /* EasyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A16C9BA71F01EF60003CA8A6 /* EasyJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1960D0D20673F1D00A7F296 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1960D0C20673F1D00A7F296 /* Property.swift */; };
+		A1960D10206740A400A7F296 /* PointerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1A205EDD3600AE5637 /* PointerType.swift */; };
+		A1960D11206740F000A7F296 /* UnsafePointer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED14205EDD3600AE5637 /* UnsafePointer+Extensions.swift */; };
+		A1960D122067422F00A7F296 /* MetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0A205EDD3500AE5637 /* MetadataType.swift */; };
+		A1960D132067425E00A7F296 /* ValueWitnessTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED08205EDD3500AE5637 /* ValueWitnessTable.swift */; };
+		A1960D142067426C00A7F296 /* Metadata+Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1B205EDD3700AE5637 /* Metadata+Kind.swift */; };
+		A1960D152067427800A7F296 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED19205EDD3600AE5637 /* Metadata.swift */; };
+		A1960D162067429200A7F296 /* MemoryProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED13205EDD3600AE5637 /* MemoryProperties.swift */; };
+		A1960D17206742AA00A7F296 /* Metadata+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED18205EDD3600AE5637 /* Metadata+Class.swift */; };
+		A1960D18206742AE00A7F296 /* Metadata+Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1C205EDD3700AE5637 /* Metadata+Struct.swift */; };
+		A1960D19206742B100A7F296 /* Metadata+Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1D205EDD3700AE5637 /* Metadata+Tuple.swift */; };
+		A1960D1A206742C000A7F296 /* Advance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1E205EDD3700AE5637 /* Advance.swift */; };
+		A1960D1B2067613600A7F296 /* NominalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0E205EDD3600AE5637 /* NominalType.swift */; };
+		A1960D1C2067613A00A7F296 /* NominalTypeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0D205EDD3600AE5637 /* NominalTypeDescriptor.swift */; };
+		A1960D1D2067616000A7F296 /* Any+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED17205EDD3600AE5637 /* Any+Extensions.swift */; };
+		A1960D1E206761A100A7F296 /* ReflectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0B205EDD3600AE5637 /* ReflectionError.swift */; };
+		A1960D1F206761A500A7F296 /* Reflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED36205EDF4800AE5637 /* Reflection.swift */; };
+		A1960D202067635D00A7F296 /* RelativePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED12205EDD3600AE5637 /* RelativePointer.swift */; };
+		A1960D212067636C00A7F296 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED09205EDD3500AE5637 /* Array+Extensions.swift */; };
 		A1C3C371206492780021AA32 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C3C370206492780021AA32 /* PersonModel.swift */; };
-		A1CEED1F205EDD3700AE5637 /* ValueWitnessTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED08205EDD3500AE5637 /* ValueWitnessTable.swift */; };
-		A1CEED20205EDD3700AE5637 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED09205EDD3500AE5637 /* Array+Extensions.swift */; };
-		A1CEED21205EDD3700AE5637 /* MetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0A205EDD3500AE5637 /* MetadataType.swift */; };
-		A1CEED22205EDD3700AE5637 /* ReflectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0B205EDD3600AE5637 /* ReflectionError.swift */; };
-		A1CEED24205EDD3700AE5637 /* NominalTypeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0D205EDD3600AE5637 /* NominalTypeDescriptor.swift */; };
-		A1CEED25205EDD3700AE5637 /* NominalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED0E205EDD3600AE5637 /* NominalType.swift */; };
-		A1CEED28205EDD3700AE5637 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED11205EDD3600AE5637 /* Properties.swift */; };
-		A1CEED29205EDD3700AE5637 /* RelativePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED12205EDD3600AE5637 /* RelativePointer.swift */; };
-		A1CEED2A205EDD3700AE5637 /* MemoryProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED13205EDD3600AE5637 /* MemoryProperties.swift */; };
-		A1CEED2B205EDD3700AE5637 /* UnsafePointer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED14205EDD3600AE5637 /* UnsafePointer+Extensions.swift */; };
-		A1CEED2D205EDD3700AE5637 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED16205EDD3600AE5637 /* Identity.swift */; };
-		A1CEED2E205EDD3700AE5637 /* Any+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED17205EDD3600AE5637 /* Any+Extensions.swift */; };
-		A1CEED2F205EDD3700AE5637 /* Metadata+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED18205EDD3600AE5637 /* Metadata+Class.swift */; };
-		A1CEED30205EDD3700AE5637 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED19205EDD3600AE5637 /* Metadata.swift */; };
-		A1CEED31205EDD3700AE5637 /* PointerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1A205EDD3600AE5637 /* PointerType.swift */; };
-		A1CEED32205EDD3700AE5637 /* Metadata+Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1B205EDD3700AE5637 /* Metadata+Kind.swift */; };
-		A1CEED33205EDD3700AE5637 /* Metadata+Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1C205EDD3700AE5637 /* Metadata+Struct.swift */; };
-		A1CEED34205EDD3700AE5637 /* Metadata+Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1D205EDD3700AE5637 /* Metadata+Tuple.swift */; };
-		A1CEED35205EDD3700AE5637 /* Advance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1E205EDD3700AE5637 /* Advance.swift */; };
-		A1CEED37205EDF4800AE5637 /* Reflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED36205EDF4800AE5637 /* Reflection.swift */; };
 		A1F6E5B42063EFEA00457BCD /* EasyModelOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F6E5B32063EFEA00457BCD /* EasyModelOptions.swift */; };
-		A1F6E5B8206404C800457BCD /* PropertyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F6E5B7206404C800457BCD /* PropertyConverter.swift */; };
+		A1F6E5B8206404C800457BCD /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F6E5B7206404C800457BCD /* Converter.swift */; };
 		A1F6E5BA2064157500457BCD /* PropertyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F6E5B92064157500457BCD /* PropertyMap.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +54,7 @@
 		A16C9BAD1F01EF60003CA8A6 /* EasyJSONTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyJSONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyJSONTests.swift; sourceTree = "<group>"; };
 		A16C9BB41F01EF60003CA8A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1960D0C20673F1D00A7F296 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		A1C3C370206492780021AA32 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		A1CEED08205EDD3500AE5637 /* ValueWitnessTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueWitnessTable.swift; sourceTree = "<group>"; };
 		A1CEED09205EDD3500AE5637 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -62,11 +62,9 @@
 		A1CEED0B205EDD3600AE5637 /* ReflectionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReflectionError.swift; sourceTree = "<group>"; };
 		A1CEED0D205EDD3600AE5637 /* NominalTypeDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NominalTypeDescriptor.swift; sourceTree = "<group>"; };
 		A1CEED0E205EDD3600AE5637 /* NominalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NominalType.swift; sourceTree = "<group>"; };
-		A1CEED11205EDD3600AE5637 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		A1CEED12205EDD3600AE5637 /* RelativePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativePointer.swift; sourceTree = "<group>"; };
 		A1CEED13205EDD3600AE5637 /* MemoryProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryProperties.swift; sourceTree = "<group>"; };
 		A1CEED14205EDD3600AE5637 /* UnsafePointer+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UnsafePointer+Extensions.swift"; sourceTree = "<group>"; };
-		A1CEED16205EDD3600AE5637 /* Identity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		A1CEED17205EDD3600AE5637 /* Any+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Any+Extensions.swift"; sourceTree = "<group>"; };
 		A1CEED18205EDD3600AE5637 /* Metadata+Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Metadata+Class.swift"; sourceTree = "<group>"; };
 		A1CEED19205EDD3600AE5637 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
@@ -77,7 +75,7 @@
 		A1CEED1E205EDD3700AE5637 /* Advance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Advance.swift; sourceTree = "<group>"; };
 		A1CEED36205EDF4800AE5637 /* Reflection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflection.swift; sourceTree = "<group>"; };
 		A1F6E5B32063EFEA00457BCD /* EasyModelOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyModelOptions.swift; sourceTree = "<group>"; };
-		A1F6E5B7206404C800457BCD /* PropertyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyConverter.swift; sourceTree = "<group>"; };
+		A1F6E5B7206404C800457BCD /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		A1F6E5B92064157500457BCD /* PropertyMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyMap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +122,7 @@
 				A1CEED07205EDD0C00AE5637 /* Helpers */,
 				A1289FFF1F01EF8E00167ACE /* EasyModel.swift */,
 				A1F6E5B32063EFEA00457BCD /* EasyModelOptions.swift */,
-				A1F6E5B7206404C800457BCD /* PropertyConverter.swift */,
+				A1F6E5B7206404C800457BCD /* Converter.swift */,
 				A1F6E5B92064157500457BCD /* PropertyMap.swift */,
 				A16C9BA71F01EF60003CA8A6 /* EasyJSON.h */,
 				A16C9BA81F01EF60003CA8A6 /* Info.plist */,
@@ -148,7 +146,6 @@
 				A1CEED1E205EDD3700AE5637 /* Advance.swift */,
 				A1CEED17205EDD3600AE5637 /* Any+Extensions.swift */,
 				A1CEED09205EDD3500AE5637 /* Array+Extensions.swift */,
-				A1CEED16205EDD3600AE5637 /* Identity.swift */,
 				A1CEED13205EDD3600AE5637 /* MemoryProperties.swift */,
 				A1CEED19205EDD3600AE5637 /* Metadata.swift */,
 				A1CEED18205EDD3600AE5637 /* Metadata+Class.swift */,
@@ -159,12 +156,12 @@
 				A1CEED0E205EDD3600AE5637 /* NominalType.swift */,
 				A1CEED0D205EDD3600AE5637 /* NominalTypeDescriptor.swift */,
 				A1CEED1A205EDD3600AE5637 /* PointerType.swift */,
-				A1CEED11205EDD3600AE5637 /* Properties.swift */,
 				A1CEED0B205EDD3600AE5637 /* ReflectionError.swift */,
 				A1CEED12205EDD3600AE5637 /* RelativePointer.swift */,
 				A1CEED14205EDD3600AE5637 /* UnsafePointer+Extensions.swift */,
 				A1CEED08205EDD3500AE5637 /* ValueWitnessTable.swift */,
 				A1CEED36205EDF4800AE5637 /* Reflection.swift */,
+				A1960D0C20673F1D00A7F296 /* Property.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -282,30 +279,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1CEED21205EDD3700AE5637 /* MetadataType.swift in Sources */,
-				A1CEED2A205EDD3700AE5637 /* MemoryProperties.swift in Sources */,
-				A1CEED29205EDD3700AE5637 /* RelativePointer.swift in Sources */,
-				A1CEED2E205EDD3700AE5637 /* Any+Extensions.swift in Sources */,
+				A1960D1E206761A100A7F296 /* ReflectionError.swift in Sources */,
+				A1960D132067425E00A7F296 /* ValueWitnessTable.swift in Sources */,
+				A1960D1F206761A500A7F296 /* Reflection.swift in Sources */,
+				A1960D162067429200A7F296 /* MemoryProperties.swift in Sources */,
+				A1960D0D20673F1D00A7F296 /* Property.swift in Sources */,
 				A1F6E5B42063EFEA00457BCD /* EasyModelOptions.swift in Sources */,
-				A1CEED2D205EDD3700AE5637 /* Identity.swift in Sources */,
-				A1CEED1F205EDD3700AE5637 /* ValueWitnessTable.swift in Sources */,
-				A1CEED24205EDD3700AE5637 /* NominalTypeDescriptor.swift in Sources */,
-				A1CEED31205EDD3700AE5637 /* PointerType.swift in Sources */,
-				A1CEED37205EDF4800AE5637 /* Reflection.swift in Sources */,
-				A1CEED2F205EDD3700AE5637 /* Metadata+Class.swift in Sources */,
-				A1CEED2B205EDD3700AE5637 /* UnsafePointer+Extensions.swift in Sources */,
-				A1CEED35205EDD3700AE5637 /* Advance.swift in Sources */,
-				A1CEED34205EDD3700AE5637 /* Metadata+Tuple.swift in Sources */,
-				A1CEED32205EDD3700AE5637 /* Metadata+Kind.swift in Sources */,
-				A1CEED25205EDD3700AE5637 /* NominalType.swift in Sources */,
-				A1CEED30205EDD3700AE5637 /* Metadata.swift in Sources */,
+				A1960D1B2067613600A7F296 /* NominalType.swift in Sources */,
 				A1F6E5BA2064157500457BCD /* PropertyMap.swift in Sources */,
-				A1F6E5B8206404C800457BCD /* PropertyConverter.swift in Sources */,
-				A1CEED20205EDD3700AE5637 /* Array+Extensions.swift in Sources */,
-				A1CEED28205EDD3700AE5637 /* Properties.swift in Sources */,
-				A1CEED22205EDD3700AE5637 /* ReflectionError.swift in Sources */,
+				A1960D19206742B100A7F296 /* Metadata+Tuple.swift in Sources */,
+				A1960D1C2067613A00A7F296 /* NominalTypeDescriptor.swift in Sources */,
+				A1960D17206742AA00A7F296 /* Metadata+Class.swift in Sources */,
+				A1960D10206740A400A7F296 /* PointerType.swift in Sources */,
+				A1960D202067635D00A7F296 /* RelativePointer.swift in Sources */,
+				A1960D122067422F00A7F296 /* MetadataType.swift in Sources */,
+				A1960D1A206742C000A7F296 /* Advance.swift in Sources */,
+				A1F6E5B8206404C800457BCD /* Converter.swift in Sources */,
+				A1960D18206742AE00A7F296 /* Metadata+Struct.swift in Sources */,
+				A1960D142067426C00A7F296 /* Metadata+Kind.swift in Sources */,
+				A1960D212067636C00A7F296 /* Array+Extensions.swift in Sources */,
 				A128A0001F01EF8E00167ACE /* EasyModel.swift in Sources */,
-				A1CEED33205EDD3700AE5637 /* Metadata+Struct.swift in Sources */,
+				A1960D152067427800A7F296 /* Metadata.swift in Sources */,
+				A1960D1D2067616000A7F296 /* Any+Extensions.swift in Sources */,
+				A1960D11206740F000A7F296 /* UnsafePointer+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

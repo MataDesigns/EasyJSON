@@ -22,7 +22,7 @@ extension Metadata {
         }
         
         func properties() throws -> [Property.Description] {
-            let properties = try fetchAndSaveProperties(nominalType: self, hashedType: HashedType(pointer))
+            let properties = try Property.getAll(forNominalType: self)
             guard let superclass = superclass, String(describing: unsafeBitCast(superclass.pointer, to: Any.Type.self)) != "SwiftObject" else {
                 return properties
             }
