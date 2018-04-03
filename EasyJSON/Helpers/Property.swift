@@ -52,9 +52,7 @@ extension Property {
         return props.map { $0.next(storage: storage) }
     }
     
-    public static func getAll(for type: Any.Type) throws -> [Property.Description] {
-//        let hashedType = HashedType(type)
-        
+    public static func getAll(for type: Any.Type) throws -> [Property.Description] {        
         if let nominalType = Metadata.Struct(type: type) {
             return try getAll(forNominalType: nominalType)
         } else if let nominalType = Metadata.Class(type: type) {

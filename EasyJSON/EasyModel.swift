@@ -37,7 +37,7 @@ open class EasyModel: EasyJSON {
 
 
 /// A protocol designed to Object map JSON. Can be used on class or struct.
-public protocol EasyJSON {
+internal protocol EasyJSON {
     init()
     var _options_: EasyModelOptions {get}
 }
@@ -116,6 +116,32 @@ extension EasyJSON {
                     modelObjects.append(objc)
                 }
                 try setValue(modelObjects, forKey: name)
+//            case let jsonArray as [Any]:
+//                let typeOf = type(of: mirrorValue)
+//                let extensionType = Extensions.of(type: typeOf)
+//                var extensionValue = Extensions.of(value: mirrorValue)
+//                let storage = extensionValue.storage()
+//                let v = extensionType.value(from: storage)
+//                for jsonValue in jsonArray {
+//                    let typeOf = type(of: jsonValue)
+//                    let extensionType = Extensions.of(type: typeOf)
+//                    var extensionValue = Extensions.of(value: jsonValue)
+//                    let storage = extensionValue.storage()
+//                    let v = extensionType.value(from: storage)
+//                    
+//                    let sameType = typeOf == type(of: v)
+//                    print(v)
+//                }
+//                let isOf = Extensions.of(type: propertyType).isValueTypeOrSubtype(value)
+//                let extensionType = Extensions.of(type: type(of: value))
+//                var extensionValue = Extensions.of(value: value)
+//                let storage = extensionValue.storage()
+//                let v = extensionType.value(from: storage)
+////                let props = try Property.getAll(for: value)
+//                let arrayType = type(of: value)
+//                print(arrayType)
+//                print(String(reflecting: propertyType))
+//                let carType = arrayType.Element.self
             // If value is json object.
             case let jsonObject as [String: Any]:
                 guard let easyModelType = getClass(mainType: propertyType) as? EasyJSON.Type else {

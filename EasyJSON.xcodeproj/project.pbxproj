@@ -11,6 +11,7 @@
 		A16C9BAE1F01EF60003CA8A6 /* EasyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C9BA41F01EF60003CA8A6 /* EasyJSON.framework */; };
 		A16C9BB31F01EF60003CA8A6 /* EasyJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */; };
 		A16C9BB51F01EF60003CA8A6 /* EasyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A16C9BA71F01EF60003CA8A6 /* EasyJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A18C81752067E3D1005E7F25 /* ClassroomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C81742067E3D1005E7F25 /* ClassroomModel.swift */; };
 		A1960D0D20673F1D00A7F296 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1960D0C20673F1D00A7F296 /* Property.swift */; };
 		A1960D10206740A400A7F296 /* PointerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED1A205EDD3600AE5637 /* PointerType.swift */; };
 		A1960D11206740F000A7F296 /* UnsafePointer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CEED14205EDD3600AE5637 /* UnsafePointer+Extensions.swift */; };
@@ -54,6 +55,7 @@
 		A16C9BAD1F01EF60003CA8A6 /* EasyJSONTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyJSONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyJSONTests.swift; sourceTree = "<group>"; };
 		A16C9BB41F01EF60003CA8A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A18C81742067E3D1005E7F25 /* ClassroomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassroomModel.swift; sourceTree = "<group>"; };
 		A1960D0C20673F1D00A7F296 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		A1C3C370206492780021AA32 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		A1CEED08205EDD3500AE5637 /* ValueWitnessTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueWitnessTable.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				A16C9BB21F01EF60003CA8A6 /* EasyJSONTests.swift */,
 				A1C3C370206492780021AA32 /* PersonModel.swift */,
 				A16C9BB41F01EF60003CA8A6 /* Info.plist */,
+				A18C81742067E3D1005E7F25 /* ClassroomModel.swift */,
 			);
 			path = EasyJSONTests;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				A16C9BB31F01EF60003CA8A6 /* EasyJSONTests.swift in Sources */,
 				A1C3C371206492780021AA32 /* PersonModel.swift in Sources */,
+				A18C81752067E3D1005E7F25 /* ClassroomModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

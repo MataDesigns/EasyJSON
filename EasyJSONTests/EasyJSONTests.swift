@@ -24,6 +24,30 @@ class EasyJSONTests: XCTestCase {
 }
 
 extension EasyJSONTests {
+    func testSnakeCase() {
+        var classroom = ClassroomModel()
+        do {
+            try classroom.fill(withDict: myClassroom)
+        } catch  {
+            print(error)
+            assert(false)
+        }
+        
+        var classroomDict = myClassroom
+        var teacherDict = classroomTeacher
+        // Classroom
+        assert(classroom.id == classroomDict["id"] as! Int,                         "Invalid classroom Id")
+        assert(classroom.name == classroomDict["name"] as? String,                  "Invalid classroom name")
+        assert(classroom.gradeAverage == classroomDict["grade_average"] as? Double, "Invalid classroom grade average")
+        // Classroom Teacher
+        assert(classroom.teacher.id == teacherDict["id"] as! Int,                   "Invalid teacher Id")
+        assert(classroom.teacher.firstName == teacherDict["first_name"] as? String, "Invalid teacher first_name")
+        assert(classroom.teacher.lastName == teacherDict["last_name"] as? String,   "Invalid teacher last_name")
+        
+        assert(classroom.students.count == (classroomDict["students"] as! [[String:Any]]).count,     "Students for classroom not filled")
+        assert(classroom.daysOfTheWeek.count == (classroomDict["days_of_the_week"] as! [Int]).count, "Days of Week for classroom not filled")
+    }
+    
     func testfromJsonDict()
     {
         var model = PersonModel()
