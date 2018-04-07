@@ -12,13 +12,6 @@ EasyJSON is a simple JSON to Object mapper.
     - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model), [Model To JSON](#model-to-json)
     - **Advanced -** [Custom Mapping](#custom-mapping), [Mapping SubObjects](#mapping-subobjects)
 
-## Example
-**NOT IMPLEMENTED YET (LOOK AT USAGE FOR HELP)**
-
-<!---
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
--->
-
 ## Requirements
 - iOS 9.0+
 - Xcode 8.0+
@@ -50,19 +43,19 @@ github "MataDesigns/EasyJSON"
 
 ## Usage
 
+### Important !!! currently only class are supported (if you use structs this will not work)
+
 ### Intro
 
 #### Creating Model
 
 Just create a class whos subclass is a EasyModel.
 
-**<span style="color:orange;">IMPORTANT</span>** Properties that are type **Int** need a default value or user **NSNumber** instead.
-
 ```swift
 import EasyJSON
 
 class Person: EasyModel {
-    var id: Int = -1
+    var id: Int!
     var firstName: String?
     var lastName: String?
 }
@@ -107,27 +100,27 @@ print(json) // Prints ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 
 ### Custom Mapping
 
-#### From Json
-
 Now what about when your JSON is different from your property names?
 
 ```swift
 import EasyJSON
 
 class Person: EasyModel {
-    var id: Int = -1
+    override var _options_: EasyModelOptions {
+    	var maps = [KeyMap]()
+        maps.append(PropertyMap(modelKey: "id", jsonKey: "personId"))
+        return EasyModelOptions(maps: maps)
+    }
+    
+    var id: Int!
     var firstName: String?
     var lastName: String?
-    
-    override var _mapFromJson_: [String : String] {
-        return ["PersonID": "id"]
-    }
 }
 ```
 Then you can now use the following json to fill then object.
 
 ```swift
-let json = ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
+let json = ["personId": 1, "firstName": "Jane", "lastName": "Doe"]
 
 let person = Person()
 person.fill(withDict: json)
@@ -135,33 +128,6 @@ person.fill(withDict: json)
 print(person.id)        // Prints 1
 print(person.firstName) // Prints Jane
 print(person.lastName)  // Prints Doe
-```
-
-#### To Json
-
-Now what about when you want it to output JSON different from your property names?
-
-```swift
-import EasyJSON
-
-class Person: EasyModel {
-    var id: Int = -1
-    var firstName: String?
-    var lastName: String?
-    
-    override var _mapToJson_: [String : String] {
-        return ["id": "PersonID"]
-    }
-}
-```
-
-Then you can now use the following json to fill then object.
-
-```swift
-import EasyJSON 
-
-let json = person.toJson()
-print(json) // Prints ["PersonID": 1, "firstName": "Jane", "lastName": "Doe"]
 ```
 
 ### Mapping SubObjects
@@ -199,20 +165,7 @@ And your JSON looks something like this
 	}]
 }
 ```
-It is as simple as adding
-
-```swift
-class Classroom: EasyModel {
-    
-    // Properties
-    
-    // This is where the magic happens!
-    override var _subObjects_: [String : AnyClass] {
-        return ["students": Student.self]
-    }
-}
-```
-Now Classroom will also fill the students property when given JSON.
+It just simply works.
 
 
 ## Author
