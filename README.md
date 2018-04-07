@@ -136,13 +136,13 @@ Now lets say you have something like this.
 
 ```swift
 class Student: EasyModel {
-    var id: Int = -1
+    var id: Int!
     var firstName: String?
     var lastName: String?
 }
 
 class Classroom: EasyModel {
-    var id: Int = -1
+    var id: Int!
     var name: String?
     var students: [Student]?
 }
