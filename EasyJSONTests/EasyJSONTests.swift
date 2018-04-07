@@ -22,180 +22,102 @@ class EasyJSONTests: XCTestCase {
     }
     
 }
-/** Dictionary Tests **/
-extension EasyJSONTests {
-    func testDictToModelFull() {
-        let jsonDict: [String : Any] = ["id" : 1, "firstName": "Nicholas", "lastName": "Mata"]
-        let model = TestModel()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        assert(model.id == jsonDict["id"] as! Int)
-        assert(model.firstName == (jsonDict["firstName"] as! String))
-        assert(model.lastName == (jsonDict["lastName"] as! String))
-    }
-    
-    func testDictToModelPartial() {
-        let jsonDict: [String : Any] = ["id" : 1, "firstName": "Nicholas"]
-        let model = TestModel()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        assert(model.id == jsonDict["id"] as! Int)
-        assert(model.firstName == (jsonDict["firstName"] as! String))
-        assert(model.lastName == nil)
-    }
-    
-    func testDictToModelEmpty() {
-        let jsonDict: [String: Any] = [:]
-        let model = TestModel()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        assert(model.id == -1)
-        assert(model.firstName == nil)
-        assert(model.lastName == nil)
-    }
-    
-}
 
-/** String Tests **/
 extension EasyJSONTests {
-    
-    
-    func testStringToModelFull() {
-        let id = 1
-        let firstName = "Nicholas"
-        let lastName = "Mata"
+    func testSnakeCase() {
+        var classroom = ClassroomModel()
+        do {
+            try classroom.fill(withDict: myClassroom)
+        } catch  {
+            print(error)
+            assert(false)
+        }
         
-        let json = "{ \"id\": \(id), \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\"}"
-        let model = TestModel()
-        measure {
-            try? model.fill(withJson: json)
-        }
-        assert(model.id == id)
-        assert(model.firstName == firstName)
-        assert(model.lastName == lastName)
-    }
-    
-    func testStringToModelPartial() {
-        let id = 1
-        let firstName = "Nicholas"
+        var classroomDict = myClassroom
+        var teacherDict = classroomTeacher
+        // Classroom
+        assert(classroom.id == (classroomDict["id"] as! Int),                         "Invalid classroom Id")
+        assert(classroom.name == classroomDict["name"] as? String,                  "Invalid classroom name")
+        assert(classroom.gradeAverage == classroomDict["grade_average"] as? Double, "Invalid classroom grade average")
+        // Classroom Teacher
+        assert(classroom.teacher.id == (teacherDict["id"] as! Int),                   "Invalid teacher Id")
+        assert(classroom.teacher.firstName == teacherDict["first_name"] as? String, "Invalid teacher first_name")
+        assert(classroom.teacher.lastName == teacherDict["last_name"] as? String,   "Invalid teacher last_name")
         
-        let json = "{ \"id\": \(id), \"firstName\": \"\(firstName)\"}"
-        let model = TestModel()
-        measure {
-            try? model.fill(withJson: json)
-        }
-        assert(model.id == id)
-        assert(model.firstName == firstName)
-        assert(model.lastName == nil)
+        assert(classroom.students.count == (classroomDict["students"] as! [[String:Any]]).count,     "Students for classroom not filled")
+        assert(classroom.daysOfTheWeek.count == (classroomDict["days_of_the_week"] as! [Int]).count, "Days of Week for classroom not filled")
     }
     
-    func testStringToModelEmpty() {
-        let json = ""
-        let model = TestModel()
-        measure {
-            try? model.fill(withJson: json)
+    func testfromJsonDict()
+    {
+        var model = PersonModel()
+        do {
+            try model.fill(withDict: me)
+        } catch {
+            print(error)
+            assert(false)
         }
-        assert(model.id == -1)
-        assert(model.firstName == nil)
-        assert(model.lastName == nil)
+        
+        var person = model
+        var personDict = me
+        var personAddressDict = myAddress
+        // Me
+        assert(person.id == personDict["id"] as! Int,                                        "Invalid Id")
+        assert(person.firstName == personDict["firstName"] as? String,                       "Invalid firstName")
+        assert(person.middleName == personDict["middleName"] as? String,                     "Invalid middleName")
+        assert(person.lastName == personDict["lastName"] as? String,                         "Invalid lastName")
+        assert(person.facebookId == personDict["facebookId"] as? Int,                        "Invalid facebookId")
+        assert(person.birthday?.dateString("MM/dd/yy") == personDict["birthday"] as? String, "Invalid birthday")
+        // My Address
+        assert(person.address.id == personAddressDict["id"] as! Int,                              "Address has invalid Id")
+        assert(person.address.streetAddress == personAddressDict["streetAddress"] as? String,     "Address has invalid street address")
+        assert(person.address.extendedAddress == personAddressDict["extendedAddress"] as? String, "Address has invalid extended address")
+        assert(person.address.city == personAddressDict["city"] as? String,                       "Address has invalid city")
+        assert(person.address.state == personAddressDict["state"] as? String,                     "Address has invalid state")
+        assert(person.address.zipcode == personAddressDict["zipcode"] as? String,                 "Address has invalid zipcode")
+        
+        assert(person.friends.count == (personDict["friends"] as! [[String:Any]]).count,     "Friends not filled")
+        
+        
+        person = model.friends[0]
+        personDict = friendOne
+        personAddressDict = friendOneAddress
+        // Friend One Tests
+        assert(person.id == personDict["id"] as! Int,                                        "Invalid Id")
+        assert(person.firstName == personDict["firstName"] as? String,                       "Invalid firstName")
+        assert(person.middleName == personDict["middleName"] as? String,                     "Invalid middleName")
+        assert(person.lastName == personDict["lastName"] as? String,                         "Invalid lastName")
+        assert(person.facebookId == personDict["facebookId"] as? Int,                        "Invalid facebookId")
+        assert(person.birthday?.dateString("MM/dd/yy") == personDict["birthday"] as? String, "Invalid birthday")
+        // Friend One Address Tests
+        assert(person.address.id == personAddressDict["id"] as! Int,                              "Address has invalid Id")
+        assert(person.address.streetAddress == personAddressDict["streetAddress"] as? String,     "Address has invalid street address")
+        assert(person.address.extendedAddress == personAddressDict["extendedAddress"] as? String, "Address has invalid extended address")
+        assert(person.address.city == personAddressDict["city"] as? String,                       "Address has invalid city")
+        assert(person.address.state == personAddressDict["state"] as? String,                     "Address has invalid state")
+        assert(person.address.zipcode == personAddressDict["zipcode"] as? String,                 "Address has invalid zipcode")
+        
+        assert(person.friends.count == (personDict["friends"] as! [[String:Any]]).count,     "Friends not filled")
+        
+        
+        person = model.friends[1]
+        personDict = friendTwo
+        personAddressDict = friendTwoAddress
+        // Friend Two Tests
+        assert(person.id == personDict["id"] as! Int,                                        "Invalid Id")
+        assert(person.firstName == personDict["firstName"] as? String,                       "Invalid firstName")
+        assert(person.middleName == personDict["middleName"] as? String,                     "Invalid middleName")
+        assert(person.lastName == personDict["lastName"] as? String,                         "Invalid lastName")
+        assert(person.facebookId == personDict["facebookId"] as? Int,                        "Invalid facebookId")
+        assert(person.birthday?.dateString("MM/dd/yy") == personDict["birthday"] as? String, "Invalid birthday")
+        // Friend Two Address Tests
+        assert(person.address.id == personAddressDict["id"] as! Int,                              "Address has invalid Id")
+        assert(person.address.streetAddress == personAddressDict["streetAddress"] as? String,     "Address has invalid street address")
+        assert(person.address.extendedAddress == personAddressDict["extendedAddress"] as? String, "Address has invalid extended address")
+        assert(person.address.city == personAddressDict["city"] as? String,                       "Address has invalid city")
+        assert(person.address.state == personAddressDict["state"] as? String,                     "Address has invalid state")
+        assert(person.address.zipcode == personAddressDict["zipcode"] as? String,                 "Address has invalid zipcode")
+        
+        assert(person.friends.count == (personDict["friends"] as! [[String:Any]]).count,     "Friends not filled")
     }
 }
-
-/** Subobjects Tests **/
-extension EasyJSONTests {
-    func testSubobjectArray() {
-        let jsonDict: [String : Any] = ["id" : 1,
-                                        "firstName": "Nicholas",
-                                        "lastName": "Mata",
-                                        "addresses": [
-                                            ["id": 1, "street": "123 Melrose Drive", "city": "Vista", "State" : "CA"],
-                                            ["id": 2, "street": "123 Western Drive", "city": "Santa Cruz", "State" : "CA"]
-                                        ]
-                                       ]
-        let model = TestModelSubobject()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        assert(model.id == jsonDict["id"] as! Int)
-        assert(model.firstName == (jsonDict["firstName"] as! String))
-        assert(model.lastName == (jsonDict["lastName"] as! String))
-        assert(model.addresses.first?.id == ((jsonDict["addresses"] as! [[String: Any]])[0]["id"] as! Int), "Subobject Addresses was not filled.")
-    }
-}
-
-/** SnakeCase Tests **/
-extension EasyJSONTests {
-    func testFromSnake() {
-        let jsonDict: [String : Any] = ["id" : 1,
-                                        "first_name": "Nicholas",
-                                        "last_name": "Mata",
-                                        "addresses": [
-                                            ["id": 1, "street": "123 Melrose Drive", "city": "Vista", "state" : "CA"],
-                                            ["id": 2, "street": "123 Western Drive", "city": "Santa Cruz", "state" : "CA"]
-            ]
-        ]
-        let model = TestModelSnakeCase()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        assert(model.id == jsonDict["id"] as! Int)
-        assert(model.firstName == (jsonDict["first_name"] as! String))
-        assert(model.lastName == (jsonDict["last_name"] as! String))
-        assert(model.addresses.first?.id == ((jsonDict["addresses"] as! [[String: Any]])[0]["id"] as! Int), "Subobject Addresses was not filled.")
-    }
-    
-    func testToSnake() {
-        let jsonDict: [String : Any] = ["id" : 1,
-                                        "first_name": "Nicholas",
-                                        "last_name": "Mata",
-                                        "addresses": [
-                                            ["id": 1, "street": "123 Melrose Drive", "city": "Vista", "state" : "CA"],
-                                            ["id": 2, "street": "123 Western Drive", "city": "Santa Cruz", "state" : "CA"]
-            ]
-        ]
-        let model = TestModelSnakeCase()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        let modelJson = model.toJson()
-        assert(modelJson["id"] as! Int == jsonDict["id"] as! Int)
-        assert(modelJson["first_name"] as! String == (jsonDict["first_name"] as! String))
-        assert(modelJson["last_name"] as! String == (jsonDict["last_name"] as! String))
-        assert(((modelJson["addresses"] as! [[String: Any]])[0]["id"] as! Int) == ((jsonDict["addresses"] as! [[String: Any]])[0]["id"] as! Int), "Subobject Addresses was not filled.")
-    }
-}
-
-/** Subclass Tests **/
-extension EasyJSONTests {
-    func testFromSubclass() {
-        let jsonDict: [String : Any] = ["id" : 1,
-                                        "firstName": "Nicholas",
-                                        "lastName": "Mata"]
-        let model = TestSubclass()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        assert(model.id == jsonDict["id"] as! Int)
-        assert(model.firstName == (jsonDict["firstName"] as! String))
-        assert(model.lastName == (jsonDict["lastName"] as! String))
-    }
-    
-    func testToSubclass() {
-        let jsonDict: [String : Any] = ["id" : 1,
-                                        "firstName": "Nicholas",
-                                        "lastName": "Mata"]
-        let model = TestSubclass()
-        measure {
-            model.fill(withDict: jsonDict)
-        }
-        let modelJson = model.toJson()
-        assert(modelJson["id"] as! Int == jsonDict["id"] as! Int)
-        assert(modelJson["firstName"] as! String == (jsonDict["firstName"] as! String))
-        assert(modelJson["lastName"] as! String == (jsonDict["lastName"] as! String))
-    }
-}
-
-

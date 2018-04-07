@@ -8,226 +8,192 @@
 
 import Foundation
 
-@objcMembers open class EasyModel: NSObject {
+enum EasyModelError: Error, CustomStringConvertible {
     
-    //MARK: - Variables
+    case invalidType(propertyName: String, extra: String)
+    case nonOptional(propertyName: String, type: Any.Type)
+    case missingRequired(propertyName: String, type: Any.Type)
     
-    /**
-     The format to parse date from string.
-     */
-    open var _timeFormat_ :String  {
-        return "yyyy-MM-dd'T'HH:mm:ss"
+    var description: String {
+        return "‼️ EasyModel Error: \(caseDescription)"
     }
     
-    /**
-     Whether dates are UTC
-     */
-    open var _isUTC_: Bool {
-        return false
+    var caseDescription: String {
+        let considerOptional = "Consider changing to optional to void this error."
+        switch self {
+        case .nonOptional(let name, let type): return "Non-optional property \(name): \(String(reflecting: type)) cannot be nil. \(considerOptional)"
+        case .invalidType(let name, let extra): return "Cannot set value for property \(name): \(extra)"
+        case .missingRequired(let name, let type): return "No value found for required property \(name): \(String(reflecting: type)). \(considerOptional)"
+        }
     }
+}
+
+/// A simple class implementing EasyJSON so that init isnt required.
+open class EasyModel: EasyJSON {
+    open private(set) var _options_: EasyModelOptions = EasyModelOptions()
     
-    /**
-     If json is snake_cased and property names are camelCased then enable this so
-     you DONT have to write a mapFromJson and mapToJson.
-    */
-    open var _snakeCased_: Bool {
-        return false
-    }
-    
-    /**
-     Provides a way to map json keys that are different from the property name.
-     
-     Example:
-     ```
-     class Person: EasyModel {
-     var first: String?
-     var last: String?
-     }
-     ```
-     Normally would require the following json.
-     
-     ```
-     ["first": value, "last": value]
-     ```
-     However by providing a custom map dictionary like
-     ```
-     ["firstName": "first", "lastName": "last"]
-     
-     ```
-     Then the object could be filled with the following json.
-     ```
-     ["firstName": "Jane", "lastName": "Doe"]
-     ```
-     */
-    open var _mapFromJson_: [String: String] {
-        return [:]
-    }
-    
-    /**
-     A dictionary which provides a way to create json
-     keys which differs from propery names.
-     
-     Example:
-     ```
-     class Person: EasyModel {
-     var firstName: String?
-     var lastName: String?
-     }
-     ```
-     Normally would create
-     
-     ```
-     ["firstName": "Jane", "lastName": "Doe"]
-     ```
-     However by providing a custom map dictionary like
-     ```
-     ["firstName": "first", "lastName": "last"]
-     
-     ```
-     Then the result would instead be.
-     ```
-     ["first": "Jane", "last": "Doe"]
-     ```
-     */
-    open var _mapToJson_: [String: String] {
-        return [:]
-    }
-    
-    /**
-     Allows you to specify sub-objects, see example for better understanding.
-     
-     Example:
-     ```
-     class Person: EasyModel {
-     var firstName: String?
-     var lastName: String?
-     }
-     
-     class Appointment: EasyModel {
-     var time: Date!
-     var person: Person
-     }
-     ```
-     By setting subObjects to
-     
-     ```
-     ["person" : Person.self]
-     ```
-     You can have the following json fill Appointment class including the person property.
-     ```
-     ["time": "2016-09-20T08:00:00", "person": ["firstName": "Jane", "lastName": "Doe"]]
-     */
-    open var _subObjects_: [String: AnyClass] {
-        return [:]
-    }
-    
-    /**
-     An array of property names which you would like to exclude when turning Model into JSON.
-     */
-    open var _exclude_: [String] {
-        return []
-    }
-    
-    private var _defaultExcludes_: [String] = ["_timeFormat_", "_isUTC_", "_exclude_", "_snakeCased_", "_mapFromJson_", "_mapToJson_", "_subObjects_", "_defaultExcludes_", "_allExcludes_"]
-    
-    private var _allExcludes_: [String] {
-        return _defaultExcludes_ + _exclude_
-    }
-    
-    required override public init() {
-        
-    }
-    
+    public required init() {}
+}
+
+
+/// A protocol designed to Object map JSON. Can be used on class or struct.
+internal protocol EasyJSON {
+    init()
+    var _options_: EasyModelOptions {get}
+}
+
+extension EasyJSON {
     // MARK: - Public Functions
     
     /**
      Fills the object with the json provided.
      
-     - parameters:
-        - jsonString: JSON represented as a string.
+     - Parameters:
+     - jsonString: JSON represented as a string.
      
      */
-    public func fill(withJson jsonString: String) throws {
+    public mutating func fill(withJson jsonString: String) throws {
         let jsonData = jsonString.data(using: .utf8)
         let parsedData = try JSONSerialization.jsonObject(with: jsonData!, options: .allowFragments) as! [String : Any]
-        fill(withDict: parsedData)
+        try fill(withDict: parsedData)
     }
     
     /**
      Fills the object with the json provided.
      
-     - parameters:
-        - jsonDict: JSON represented as a dictionary.
+     - Parameters:
+     - jsonDict: JSON represented as a dictionary.
      */
-    public func fill(withDict jsonDict: [String: Any]) {
-        for (name, mirror) in propertyMirrors() {
-            
-            let jsonKey = _mapFromJson_[name] != nil ? _mapFromJson_[name]! : (_snakeCased_ ? name.camelCaseToSnakeCase : name)
-            
-            if let value = jsonDict[jsonKey] {
-                if let subObjectType = _subObjects_[name] {
-                    handleSubObject(value, name, type: subObjectType)
+    public mutating func fill(withDict jsonDict: [String: Any?]) throws {
+        for (name, mirror, mirrorValue) in propertyMirrors() {
+            // The properties type
+            let propertyType = mirror.subjectType
+            // Get jsonKey aka property name unless snakeCased option is enabled
+            var jsonKey = _options_.snakeCased ? name.camelCaseToSnakeCase : name
+            // Check if property has a custom map
+            if let map = _options_.map(for: name) {
+                // Get new jsonKey from the map
+                guard let mapKey = map.jsonKey else {
+                    // Continue because map jsonKey was nil (aka dont fill property)
                     continue
                 }
-                
-                switch value {
-                case is NSNull:
-                    if mirror.displayStyle == .optional {
-                        setValue(nil, forKey: name)
-                    } else {
-                        setValue("", forKey: name)
-                    }
-                case is Bool:
-                    setValue(value as! Bool, forKey: name)
-                case is String:
-                    handleString(value as! String, name, mirror)
-                case is Int:
-                    setValue(value as! Int, forKey: name)
-                case is Date:
-                    setValue(value as! Date, forKey: name)
-                case is [[String: Any]]:
-                    if mirror.displayStyle != .optional {
-                        print("⚠️ EasyJSON WARNING: Property named \"\(name)\" was not set because not declared as subObject.\n    This can result in unwanted behavior! \n    TO REMOVE THIS WARNING: make property named \"\(name)\" optional in class \"\(Mirror(reflecting: self).subjectType)\".")
-                    }
-                case is [String: Any]:
-                    if mirror.displayStyle != .optional {
-                        print("⚠️ EasyJSON WARNING: Property named \"\(name)\" was not set because not declared as subObject.\n    This can result in unwanted behavior! \n    TO REMOVE THIS WARNING: make property named \"\(name)\" optional in class \"\(Mirror(reflecting: self).subjectType)\".")
-                    }
-                case nil:
-                    if mirror.displayStyle == .optional {
-                        setValue(nil, forKey: name)
-                    }
-                default:
-                    setValue(value, forKey: name)
+                jsonKey = mapKey
+            }
+            // Get value from json dict for key (aka property name or from a map)
+            guard let value = jsonDict[jsonKey] else {
+                // Json Dict doesnt contain key (Check if property is required aka non-optional)
+                if getValue(for: name) == nil && !isOptional(type: propertyType) {
+                    throw EasyModelError.missingRequired(propertyName: name, type: propertyType)
                 }
-                
+                continue
+            }
+            
+            // Check if jsonDict is nil that the property is Optional (aka can be nil).
+            if value == nil && !isOptional(type: propertyType) {
+                throw EasyModelError.nonOptional(propertyName: name, type: propertyType)
+            }
+            
+            // Get converter either for property name or for type.
+            if let converter = getConverter(propertyName: name, propertyType: propertyType) {
+                // Get value from converter
+                let convertValue = converter.toModel(value)
+                try setValue(convertValue, forKey: name)
+                continue
+            }
+            
+            switch value {
+            // If value is array of json objects.
+            case let jsonArray as [[String: Any]]:
+                guard let objectType = getClass(mainType: propertyType) as? EasyJSON.Type else {
+                    throw EasyModelError.invalidType(propertyName: name, extra: "\(String(reflecting: propertyType)) is not an Array<EasyJSON>")
+                }
+                // If array is initialized in code use that value else create new array.
+                var modelObjects = mirrorValue as? [EasyJSON] ?? [EasyJSON]()
+                modelObjects.removeAll()
+                for jsonObject in jsonArray {
+                    var objc = objectType.init()
+                    try objc.fill(withDict: jsonObject)
+                    modelObjects.append(objc)
+                }
+                try setValue(modelObjects, forKey: name)
+//            case let jsonArray as [Any]:
+//                let typeOf = type(of: mirrorValue)
+//                let extensionType = Extensions.of(type: typeOf)
+//                var extensionValue = Extensions.of(value: mirrorValue)
+//                let storage = extensionValue.storage()
+//                let v = extensionType.value(from: storage)
+//                for jsonValue in jsonArray {
+//                    let typeOf = type(of: jsonValue)
+//                    let extensionType = Extensions.of(type: typeOf)
+//                    var extensionValue = Extensions.of(value: jsonValue)
+//                    let storage = extensionValue.storage()
+//                    let v = extensionType.value(from: storage)
+//                    
+//                    let sameType = typeOf == type(of: v)
+//                    print(v)
+//                }
+//                let isOf = Extensions.of(type: propertyType).isValueTypeOrSubtype(value)
+//                let extensionType = Extensions.of(type: type(of: value))
+//                var extensionValue = Extensions.of(value: value)
+//                let storage = extensionValue.storage()
+//                let v = extensionType.value(from: storage)
+////                let props = try Property.getAll(for: value)
+//                let arrayType = type(of: value)
+//                print(arrayType)
+//                print(String(reflecting: propertyType))
+//                let carType = arrayType.Element.self
+            // If value is json object.
+            case let jsonObject as [String: Any]:
+                guard let easyModelType = getClass(mainType: propertyType) as? EasyJSON.Type else {
+                    throw EasyModelError.invalidType(propertyName: name, extra: "\(String(reflecting: propertyType)) is not a subclass of EasyJSON")
+                }
+                var easyModel = mirrorValue as? EasyJSON ?? easyModelType.init()
+                try easyModel.fill(withDict: jsonObject)
+                try setValue(easyModel, forKey: name)
+            default:
+                try setValue(value, forKey: name)
             }
         }
     }
     
-    
     /**
      Turns in object into JSON dictionary. [String: Any]
      
-     - returns: Dictionary representing the model in JSON.
+     - Returns: Dictionary representing the model in JSON.
      */
-    public func toJson() -> [String: Any] {
+    public func toJson() -> [String: Any?] {
         var json = [String: Any]()
-        for (key, _) in propertyMirrors() {
+        for (key, mirror, _) in propertyMirrors() {
             
-            if _allExcludes_.contains(key) {
+            if key == "_options_" {
                 continue
             }
             
-            let jsonKey = _mapToJson_[key] != nil ? _mapToJson_[key]! : (_snakeCased_ ? key.camelCaseToSnakeCase : key)
+            var jsonKey = _options_.snakeCased ? key.camelCaseToSnakeCase : key
             
-            let propertyValue = self.value(forKey: key) as Any?
+            if let map = _options_.map(for: key) {
+                if let mapKey = map.jsonKey {
+                    jsonKey = mapKey
+                } else {
+                    continue
+                }
+            }
+            
+            let propertyValue = getValue(for: key)
+            
+            // Get converter either for property name or for type.
+            if let converter = getConverter(propertyName: key, propertyType: mirror.subjectType) {
+                // Get value from converter
+                let convertValue = converter.toJson(propertyValue)
+                json[jsonKey] = convertValue
+                continue
+            }
             
             switch propertyValue {
             case let jsonModel as EasyModel:
                 json[jsonKey] = jsonModel.toJson()
             case let jsonModels as [EasyModel]:
-                var models = [[String: Any]]()
+                var models = [[String: Any?]]()
                 for jsonModel in jsonModels {
                     models.append(jsonModel.toJson())
                 }
@@ -241,65 +207,99 @@ import Foundation
     
     // MARK: - Private Functions
     
-    /**
-     Handles a property that is in subObjects dictionary.
-     */
-    private func handleSubObject(_ attribute: Any, _ property: String, type: AnyClass)  {
-        
-        guard type is EasyModel.Type else {
-            print("⚠️ EasyJSON WARNING: Sub-Object must be of type EasyModel.")
-            return
+    
+    /// Get converter from name/key or type
+    ///
+    /// - Parameters:
+    ///   - propertyName: The property name/key
+    ///   - propertyType: The property type
+    /// - Returns: The converter if one exists.
+    func getConverter(propertyName: String, propertyType: Any.Type) -> Converter? {
+        // Check if property has a key converter
+        if let converter = _options_.converter(for: .key(propertyName)) {
+            return converter
         }
-        
-        switch attribute {
-        case let jsonDict as [String : Any]:
-            let objc = (type as! EasyModel.Type).init()
-            objc.fill(withDict: jsonDict)
-            setValue(objc, forKey: property)
-        case let jsonDicts as [[String : Any]]:
-            var modelObjects = [EasyModel]()
-            for jsonObject in jsonDicts {
-                let objc = (type as! EasyModel.Type).init()
-                objc.fill(withDict: jsonObject)
-                modelObjects.append(objc)
-            }
-            if modelObjects.count > 0 {
-                self.setValue(modelObjects, forKey: property)
-            }
-            
-        default:
-            break
+        // Check if property has a type converter
+        if let converter = _options_.converter(for: .type(propertyType)) {
+            return converter
+        }
+        // No converter for name or type
+        return nil
+    }
+    
+    /// Gets the class from the given type.
+    /// If given Optional or Implicit will unwrap.
+    /// If given a Array will get class from Array object.
+    ///
+    /// - Parameter mainType: The type to check if class exists.
+    /// - Returns: The class that was unwrapped from the type.
+    private func getClass(mainType: Any.Type) -> AnyClass? {
+        let typeString = String(reflecting: mainType)
+        let typeComponents = typeString.components(separatedBy: "<")
+        let baseType = typeComponents[typeComponents.count-1].replacingOccurrences(of: ">", with: "")
+        return NSClassFromString(baseType)
+    }
+    
+    
+    /// Determines if a Type is Optional or not using string reflection of type.
+    ///
+    /// - Parameter type: The Type which you would like to determine if is optional
+    /// - Returns: A boolean value indicating whether the type is optional.
+    private func isOptional(type: Any.Type) -> Bool {
+        let typeString = String(reflecting: type)
+        if typeString.contains("ImplicitlyUnwrapped") {
+            return false
+        }
+        return typeString.contains("Optional")
+    }
+    
+    /**
+     Get the value of the property using Reflection
+     
+     - Parameter
+     - key: The property key/name
+     - Returns: The value of the property
+     */
+    private func getValue(for key:String) ->Any? {
+        do {
+            return try Reflection.get(key, from: self)
+        } catch  {
+            return nil
         }
     }
     
     /**
-     Handles a string value but checking for dates in the specified format.
+     Set the value of the property using Reflection
+     
+     - Parameters:
+     - value: The value to set the property too
+     - key: The property key/name
      */
-    private func handleString(_ string: String,_ property: String, _ mirror: Mirror) {
-        if mirror.subjectType == Date!.self || mirror.subjectType == Date?.self {
-            if let date = Date.from(string, format: _timeFormat_, timeZone: _isUTC_ ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
-                self.setValue(date, forKey: property)
-            }else if let date = Date.from(string, format: "HH:mm:ss", timeZone: _isUTC_ ? TimeZone(identifier: "UTC")! : .autoupdatingCurrent) {
-                self.setValue(date, forKey: property)
-            }
-        } else {
-            self.setValue(string, forKey: property)
+    private mutating func setValue(_ value: Any?, forKey key: String) throws {
+        guard let value = value else {
+            return
         }
+        do {
+            return try Reflection.set(value, key: key, for: &self)
+        } catch  {
+            throw EasyModelError.invalidType(propertyName: key, extra: String(describing: error))
+        }        
     }
     
     /**
      Parse mirror matching mirror to property name
      (Parsing superclass as well.)
-    
-     - Parameter mirror: mirror which went want to get all the properties.
+     
+     - Parameter
+     - mirror: mirror which went want to get all the properties.
      - Returns: An array of tuples that is the property name and the property mirror.
      */
-    private func mirrorTo(_ mirror: Mirror) -> [(String, Mirror)] {
-        var results: [(String, Mirror)] = []
+    private func mirrorTo(_ mirror: Mirror) -> [(String, Mirror, Any?)] {
+        var results: [(String, Mirror, Any?)] = []
         for child in mirror.children
         {
             if let name = child.label{
-                results.append((name, Mirror(reflecting: child.value)))
+                results.append((name, Mirror(reflecting: child.value), child.value))
             }
         }
         if let parent = mirror.superclassMirror {
@@ -313,12 +313,11 @@ import Foundation
      This is a helper method used to get information about the properties
      of the object.
      
-     - returns:
-     A dictionary where key is the property name and value is the mirror for the property.
-     
+     - Returns: A dictionary where key is the property name and value is
+     the mirror for the property.
      */
-    private func propertyMirrors() -> [(String, Mirror)] {
-        var results: [(String, Mirror)] = []
+    private func propertyMirrors() -> [(String, Mirror, Any?)] {
+        var results: [(String, Mirror, Any?)] = []
         let mirror = Mirror(reflecting: self)
         results.append(contentsOf: mirrorTo(mirror))
         
@@ -347,14 +346,14 @@ extension String {
 }
 
 extension Date {
-    static func from(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss", timeZone: TimeZone = .autoupdatingCurrent) -> Date?  {
+    public static func from(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss", timeZone: TimeZone = .autoupdatingCurrent) -> Date?  {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timeZone
         return formatter.date(from: string)
     }
     
-    func dateString(_ format: String = "MM/dd/yyyy HH:mm a", timeZone: TimeZone = .autoupdatingCurrent) -> String {
+    public func dateString(_ format: String = "MM/dd/yyyy HH:mm a", timeZone: TimeZone = .autoupdatingCurrent) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timeZone
