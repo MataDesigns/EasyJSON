@@ -7,6 +7,8 @@
 //
 
 struct NominalTypeDescriptor : PointerType {
+    typealias Pointee = _NominalTypeDescriptor
+    
     var pointer: UnsafePointer<_NominalTypeDescriptor>
 
     var mangledName: String {

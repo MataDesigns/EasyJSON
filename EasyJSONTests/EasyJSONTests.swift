@@ -36,11 +36,11 @@ extension EasyJSONTests {
         var classroomDict = myClassroom
         var teacherDict = classroomTeacher
         // Classroom
-        assert(classroom.id == classroomDict["id"] as! Int,                         "Invalid classroom Id")
+        assert(classroom.id == (classroomDict["id"] as! Int),                         "Invalid classroom Id")
         assert(classroom.name == classroomDict["name"] as? String,                  "Invalid classroom name")
         assert(classroom.gradeAverage == classroomDict["grade_average"] as? Double, "Invalid classroom grade average")
         // Classroom Teacher
-        assert(classroom.teacher.id == teacherDict["id"] as! Int,                   "Invalid teacher Id")
+        assert(classroom.teacher.id == (teacherDict["id"] as! Int),                   "Invalid teacher Id")
         assert(classroom.teacher.firstName == teacherDict["first_name"] as? String, "Invalid teacher first_name")
         assert(classroom.teacher.lastName == teacherDict["last_name"] as? String,   "Invalid teacher last_name")
         

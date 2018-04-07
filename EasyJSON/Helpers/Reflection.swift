@@ -20,7 +20,7 @@ class Reflection {
     static private func constructValueType<T>(_ constructor: (Property.Description) throws -> Any) throws -> T {
         guard Metadata(type: T.self)?.kind == .struct else { throw ReflectionError.notStruct(type: T.self) }
         let pointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
-        defer { pointer.deallocate(capacity: 1) }
+        defer { pointer.deallocate() }
         var values: [Any] = []
         try constructType(storage: UnsafeMutableRawPointer(pointer), values: &values, properties: Property.getAll(for: T.self), constructor: constructor)
         return pointer.move()

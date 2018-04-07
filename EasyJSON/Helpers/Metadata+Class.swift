@@ -8,14 +8,18 @@
 
 extension Metadata {
     struct Class : NominalType {
-
+        
         static let kind: Kind? = .class
         var pointer: UnsafePointer<_Metadata._Class>
-
-        var nominalTypeDescriptorOffsetLocation: Int {
+        
+        var nominalTypeDescriptor: NominalTypeDescriptor {
+            return pointer.withMemoryRebound(to: NominalTypeDescriptor.self, capacity: 15, { $0[nominalTypeDescriptorLocation] })
+        }
+        
+        var nominalTypeDescriptorLocation: Int {
             return is64BitPlatform ? 8 : 11
         }
-
+        
         var superclass: Class? {
             guard let superclass = pointer.pointee.superclass else { return nil }
             return Metadata.Class(type: superclass)
@@ -28,7 +32,7 @@ extension Metadata {
             }
             return try superclass.properties() + properties
         }
-
+        
     }
 }
 
