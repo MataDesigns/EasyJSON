@@ -100,7 +100,7 @@ print(json) // Prints ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 
 ### KeyMaps
 
-You can make custom keymaps by implementing the KeyMap protocol.
+You can make custom keymaps by implementing the KeyMap protocol.<br/>
 Currently we provide two KeyMaps.
 
 #### PropertyMap
@@ -175,10 +175,10 @@ print(jsonDict["fullName"]) // Prints nothing fullName key doesn't exist.
 ```
 
 ### Converters
-You can make custom converter by implementing the Converter protocol.
-Converters can be applied to either a specific type or a specific key.
-(Key ConverterKey takes priority over Type ConverterKey)
-Currently we provide two Converters.
+You can make custom converter by implementing the Converter protocol.<br/>
+Converters can be applied to either a specific type or a specific key.<br/>
+(Key ConverterKey takes priority over Type ConverterKey)<br/>
+Currently we provide two Converters.<br/>
 #### DateConverter
 String to Date
 ```swift
