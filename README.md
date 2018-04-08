@@ -218,6 +218,31 @@ Thats it then you can use it like any other Date type.
 
 #### BoolConverter
 String to Bool
+```swift
+{
+   "id": 1,
+   "firstName": "Nicholas",
+   "lastName": "Mata",
+   "isBestFriend" : "No"
+}
+```
+So how do we turn a string into a bool?
+```swift
+import EasyJSON
+
+class Person: EasyModel {
+    override var _options_: EasyModelOptions {
+    	var converters = [ConverterKey:Converter]()
+	converters[.key("isBestFriend")] = BoolConverter(trueWhen: "Yes", whenFalse: "No", caseSensitive: false)
+        return EasyModelOptions(converters: converters)
+    }
+    
+    var id: Int!
+    var firstName: String?
+    var lastName: String?
+    var isBestFriend: Bool = false
+}
+```
 
 ### Mapping SubObjects
 
