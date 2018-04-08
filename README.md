@@ -10,7 +10,7 @@ EasyJSON is a simple JSON to Object mapper.
 - [Features](#features)
 - [Usage](#usage)
     - **Intro -** [Creating Model](#creating-model), [Filling Model](#filling-model), [Model To JSON](#model-to-json)
-    - **Advanced -** [Custom Mapping](#custom-mapping), [Mapping SubObjects](#mapping-subobjects)
+    - **Advanced -** [KeyMaps](#keymaps), [Converters](#converters), [Mapping SubObjects](#mapping-subobjects)
 
 ## Requirements
 - iOS 9.0+
@@ -71,7 +71,7 @@ To go from JSON to Model.
 
 **So long as the keys match the property name exactly.**
 
-If your Dictionary keys are different from the property names go to [Custom Mapping](#custom-mapping).
+If your Dictionary keys are different from the property names go to [KeyMaps](#keymaps).
 
 ```swift
 import EasyJSON
@@ -98,8 +98,12 @@ print(json) // Prints ["id": 1, "firstName": "Jane", "lastName": "Doe"]
 
 ## Advanced
 
-### Custom Mapping
+### KeyMaps
 
+You can make custom keymaps by implementing the KeyMap protocol.
+Currently we provide two KeyMaps.
+
+#### PropertyMap
 Now what about when your JSON is different from your property names?
 
 ```swift
@@ -129,6 +133,91 @@ print(person.id)        // Prints 1
 print(person.firstName) // Prints Jane
 print(person.lastName)  // Prints Doe
 ```
+
+#### HidePropertyMap
+Now what about when you have a property that has nothing to do with the json?
+```swift
+import EasyJSON
+
+class Person: EasyModel {
+    override var _options_: EasyModelOptions {
+    	var maps = [KeyMap]()
+        maps.append(HidePropertyMap(modelKey: "fullName"))
+        return EasyModelOptions(maps: maps)
+    }
+    
+    var id: Int!
+    var firstName: String?
+    var lastName: String?
+    var fullName: String {
+        var name = ""
+        name = name + (firstName ?? "")
+        name = name + (lastName != nil ? " " + lastName! : "")
+        return name
+    }
+}
+```
+Then you fill or toJson the property is hidden
+
+```swift
+let json = ["personId": 1, "firstName": "Jane", "lastName": "Doe"]
+
+let person = Person()
+person.fill(withDict: json)
+
+print(person.id)        // Prints 1
+print(person.firstName) // Prints Jane
+print(person.lastName)  // Prints Doe
+print(person.fullName)  // Prints Jane Doe
+
+let jsonDict = person.toJson()
+print(jsonDict["fullName"]) // Prints nothing fullName key doesn't exist.
+```
+
+### Converters
+You can make custom converter by implementing the Converter protocol.
+Converters can be applied to either a specific type or a specific key.
+(Key ConverterKey takes priority over Type ConverterKey)
+Currently we provide two Converters.
+#### DateConverter
+String to Date
+```swift
+{
+   "id": 1,
+   "firstName": "Nicholas",
+   "lastName": "Mata",
+   "birthday": "02/18/1994",
+   "createdOn": "2017-01-28T10:00:48",
+   "updatedOn": "2017-01-28T10:00:48"
+}
+```
+So the Dates are just Strings so how do we change this into a Date Type 
+and then convert back when turning into json?
+```swift
+import EasyJSON
+
+class Person: EasyModel {
+    override var _options_: EasyModelOptions {
+    	var converters = [ConverterKey:Converter]()
+	converters[.key("birthDate")] = DateConverter(format: "MM/dd/yy")
+        converters[.type(Date.self)] = DateConverter(format: "yyyy-MM-dd'T'HH:mm:ss")
+        return EasyModelOptions(converters: converters)
+    }
+    
+    var id: Int!
+    var firstName: String?
+    var lastName: String?
+    
+    var birthday: Date?
+    var createdOn: Date?
+    var updatedOn: Date?
+}
+```
+
+Thats it then you can use it like anyother Date type.
+
+#### BoolConverter
+String to Bool
 
 ### Mapping SubObjects
 
