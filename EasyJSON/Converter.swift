@@ -60,7 +60,7 @@ public class BoolConverter: Converter {
     public var toJson: ToJsonConverter
     
     
-    public init(key: String, trueWhen: String, whenFalse: String, caseSensitive: Bool = false) {
+    public init(trueWhen: String, whenFalse: String, caseSensitive: Bool = false) {
         var trueString = trueWhen
         if !caseSensitive {
             trueString = trueString.lowercased()

@@ -24,7 +24,7 @@ let me: [String: Any?] = [
     "middleName": nil,
     "lastName": "Mata",
     "facebookId": nil,
-    "birthday": "02/18/94",
+    "dateOfBirth": "02/18/94",
     "address": myAddress,
     "friends": [friendOne, friendTwo]
 ]
@@ -72,6 +72,14 @@ class UserModel: EasyModel {
     var firstName: String?
     var middleName: String?
     var lastName: String?
+    
+    var fullName: String {
+        var name = ""
+        name = name + (firstName ?? "")
+        name = name + (middleName != nil ? " " + middleName! : "")
+        name = name + (lastName != nil ? " " + lastName! : "")
+        return name
+    }
 }
 
 class PersonModel: UserModel {
@@ -79,7 +87,10 @@ class PersonModel: UserModel {
     override var _options_: EasyModelOptions {
         var converters = [ConverterKey: Converter]()
         converters[.type(Date.self)] = DateConverter(format: "MM/dd/yy")
-        return EasyModelOptions(converters:converters)
+        
+        var maps = [KeyMap]()
+        maps.append(PropertyMap(modelKey: "birthday", jsonKey: "dateOfBirth"))
+        return EasyModelOptions(converters:converters, maps: maps)
     }
     
     var facebookId: Int?
