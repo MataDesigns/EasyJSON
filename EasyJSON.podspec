@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyJSON'
-  s.version          = '0.5.2'
+  s.version          = '1.0.0'
   s.summary          = 'A simple and fast way to turn JSON dictionary or string into a Swift Object.'
 
 # This description is used to generate tags and improve search results.
