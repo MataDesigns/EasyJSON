@@ -214,7 +214,7 @@ class Person: EasyModel {
 }
 ```
 
-Thats it then you can use it like anyother Date type.
+Thats it then you can use it like any other Date type.
 
 #### BoolConverter
 String to Bool
