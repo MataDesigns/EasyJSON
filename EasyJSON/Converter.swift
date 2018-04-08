@@ -50,7 +50,7 @@ public class DateConverter: Converter {
     
     public init(format:String, timeZone: TimeZone = .autoupdatingCurrent) {
         self.toModel = { return Date.from($0 as! String, format: format, timeZone: timeZone) }
-        self.toJson = { return ($0 as! Date).dateString(format) }
+        self.toJson = { return ($0 as? Date)?.dateString(format) ?? nil }
     }
 }
 

@@ -135,7 +135,7 @@ extension EasyJSON {
      
      - Returns: Dictionary representing the model in JSON.
      */
-    public func toJson() -> [String: Any?] {
+    public func toJson() -> [String: Any] {
         var json = [String: Any]()
         for (key, mirror, _) in propertyMirrors() {
             
@@ -167,7 +167,7 @@ extension EasyJSON {
             case let jsonModel as EasyModel:
                 json[jsonKey] = jsonModel.toJson()
             case let jsonModels as [EasyModel]:
-                var models = [[String: Any?]]()
+                var models = [[String: Any]]()
                 for jsonModel in jsonModels {
                     models.append(jsonModel.toJson())
                 }
