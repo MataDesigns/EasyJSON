@@ -37,7 +37,7 @@ open class EasyModel: EasyJSON {
 
 
 /// A protocol designed to Object map JSON. Can be used on class or struct.
-internal protocol EasyJSON {
+public protocol EasyJSON {
     init()
     var _options_: EasyModelOptions {get}
 }
