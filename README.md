@@ -1,3 +1,5 @@
+# DEPRECATED - Swift 4.2 adds native support [Learn More](https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types)
+
 # EasyJSON
 
 [![CI Status](http://img.shields.io/travis/MataDesigns/EasyJSON.svg?style=flat)](https://travis-ci.org/MataDesigns/EasyJSON)
